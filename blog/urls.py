@@ -1,0 +1,38 @@
+from django.contrib import admin
+from django.urls import path
+from .views import *
+from django.contrib.auth import views as auth_views
+urlpatterns = [
+    path('', home, name='home'),
+    path('post/', post, name='post'),
+    path('login/', login_page, name ='login'),
+    path('search/', search, name ='search'),
+    path('custom-admin/', custom_admin, name ='custom_admin'),
+    path('categories/', all_category, name ='categories'),
+    path('categories/<str:category_name>/', postfilter, name ='categories'),
+    path('custom-admin-category/', custom_admin_category, name ='custom_admin_category'),
+    path('users-info/', user_info, name ='user_info'),
+    # path('login/', auth_views.LoginView.as_view(template_name= 'blog/login.html'), name ='login'),
+    path('logout/', log_out, name ='logout'),
+    path('edit-profile/', editprofile, name ='editprofile'),
+    path('userprofile/', userprofile, name ='userprofile'),
+    path('register/', register, name ='register'),
+    path('contact/', contact, name ='contact'),
+    path('my-posts/', my_post, name ='my-post'),
+    path('likes', like_mypost, name ='likes'),
+    path('create-post/', userpost, name ='userpost'),
+    path('like', like_home, name ='likess'),
+    path('users-info/<int:p_id>/', user_details, name ='user_details'),
+    path('custom-admin/add-post', admin_add_post, name ='admin_add_post'),
+    path('custom-admin/register', admin_registration, name ='admin_registration'),
+    path('custom-admin/<slug>/update', custom_admin_update, name ='custom_admin_update'),
+    path('custom-admin/<slug>/delete', custom_admin_delete, name ='custom_admin_delete'),
+    path('post/<slug>/user-info/', userdetails, name ='userdetails'),
+    path('post/<slug>/update-post/', update_post, name ='update_post'),
+    path('post/<slug>/delete/', delete_post, name ='delete'),
+    path('post/like', like_post, name ='like'),
+    # path('edit-profile/', edit_profile, name ='edit_profile'),
+    path('change-password/', change_password, name ='change_password'),
+    path('my-posts/<slug>/', mypost_details, name ='my-postDetails'),
+    path('post/<slug>/', Details, name='details'),
+]

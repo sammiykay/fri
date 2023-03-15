@@ -1,0 +1,111 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+{% load static %}
+<title>{{user.username}} Profile</title>
+<style type="text/css">
+	.flex {
+		display: flex;
+		width: 80%;
+		margin: 0px auto;
+		justify-content: space-around;
+	}
+	.main {
+		width: 400px;
+		margin-top: 10px;	
+	}
+	.profile-info {
+		box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+		width: 400px;
+	}
+	.profile-info img {
+		width: 400px;
+    }   
+    .profile-info p.username {
+    	margin-top: -40px;
+    	font-weight: bold;
+    	font-size: 20px;
+    	margin-left: 10px;
+    } 
+    .detail{
+    	margin-top: 20px;
+    	padding: 20px 12px;
+    }
+    .detail p {
+    	font-size: 15px;
+    }
+    span {
+    	padding-top: 20px;
+    }
+    .social-media ul{
+    	width: 100%;
+    	display: flex;
+    	justify-content: space-around;
+
+    }
+    .social-media ul li{
+    	list-style: none;
+    }
+    .login-box{
+    	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    	padding: 17px;
+    	margin-top: 10px;
+    }
+    .message p {
+    	font-size: 12px;
+    	text-align: center;
+    	padding: 9px;
+    	background-color: #DDFFDD;
+    }
+    form {
+    	width: 300px;
+    }
+    form p {
+    	margin: 2px 0px;
+    }
+	select {
+		width: 277px;;
+		padding: 7px 12px;
+    	border: 1px solid #ccc;
+	}
+    input {
+    	width: 250px;
+    	padding: 7px 12px;
+    	margin-top: 5px;
+    	border: 1px solid #ccc;
+    }
+    button {
+    	margin-top: 10px;
+    	padding: 6px 18px;
+    }
+    .helptext {
+    	display: none;
+    }
+	</style>
+	
+</head>
+<body>
+	<div class="container">
+		<div class="flex">
+			<div class="main">
+				<div class="message">
+					{% if messages %}
+					{% for message in messages %}
+					<p>{{message}}</p>
+					{% endfor %}
+					{% endif %}
+				</div>
+				<div class="profile-info">
+					
+			<div class=sub-main>
+				<div class="login-box">
+					<form method="POST" enctype="multipart/form-data">
+						{% csrf_token %}
+						{{form}}
+						<button type="submit">Update</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+{% endblock %}

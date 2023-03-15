@@ -1,0 +1,135 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+{% load static %}
+<title>{{post.category.category_name}} | {{post.slug}}</title>
+<script src="/static/js/jquery.js"></script>
+<div>
+	<div class="" style="background-image: url('{{post.category.imageURL}}'); background-position: center; background-size: cover; width: 100%; ">
+		<div class="m-auto" style="width: 80%;">
+			<div class="flex bac ">
+				<div></div>
+				<div>
+					<div class="flex mb-5 items-center">
+						<p class="category bg-yellow-500 py-1 px-2 rounded-sm text-white"><a href="/categories/{{post.category.category_name}}">{{post.category.category_name}}</a></p>
+						<p class="ml-6 text-white">{{post.date}}</p>
+					</div>
+					<p class="text-white font-bold text-xl" style="font-size: 28px; line-height: 2.5rem; padding-bottom: 10px;">{{post.title}}</p>
+				</div>
+			</div>
+		</div>
+		<!-- <img src="{{post.category.imageURL}}"> -->
+	</div>
+	<div class="my-9">
+		<div class="m-auto" style="width: 80%;">
+			<div class="lg:grid" style="grid-template-columns: 65% 35%; grid-column-gap: 16px;">
+			   <div>
+				   <div>
+						<span class="text-gray-500 my-7" style="line-height: 2.2rem;font-size: 16px; ">
+							{{post.text|safe}}</span>
+						
+					</div>
+					<div>
+						<div class="comment">
+							<div id="comment">
+								<p class="text-xl font-bold mt-7">All Comments ({{comment.all.count}})</p>
+								{% if comment.all.count < 1 %}
+								<p id="dis" class="text-gray-500 mt-6">No Comment</p>
+								{% else %}
+								{% for comment in comment %}
+								<div class="flex mb-5 mt-10 pb-5 items-center" style="border-bottom: 1px solid #ccc;">
+									<img src="{{comment.userprofile.imageURL}}" class="mr-6" style="height: 80px; border-radius: 100%;" width="80px" alt="">
+									<div>
+										<p class="name font-bold text-sm">{% if comment.user.firstname %}{{comment.user.firstname.capitalize}}{% else %}{{comment.user.username.capitalize}}{% endif %}</p>
+										<p class="date text-gray-400 text-sm">{{comment.created}}</p>
+										<p class="text">
+											{{comment.body}}
+										</p>
+									</div>
+								</div>
+								{% endfor %}
+								{% endif %}
+							</div>
+							<div class="mt-9">
+								<p class="font-bold mb-3">Write Your Comment</p>
+								<div class="border rounded py-2 px-3 border-gray-400">
+									<form action="" id="form" method="post">
+										{% csrf_token %}
+										<textarea id='body' name="body" class="mb-2 outline-none text-sm rounded py-2 px-2" placeholder="Write Your Comment" id="" style="width: 100%; height: 130px;"></textarea>
+										<div class="flex justify-between">
+											<div></div>
+											<button type="submit" id="sub" class="bg-blue-400 text-white p-2 px-2 rounded">Comment</button>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div style="">
+					<p class="mb-5 font-bold text-2xl my-7">Recent Posts</p>
+					{% for p in posts|slice:"5" %}
+					<div class="mt-7">
+						<div class="flex items-center">
+							<img src="{{p.imageURL}}" style="width: 100px; height: auto;"  alt="">
+							<a href="/post/{{p.slug}}"><p class="ml-3 font-bold">{{p.title}}</p></a>
+						</div>
+					</div>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+</body>
+<script>
+let dis = document.getElementById('dis')
+let com = document.getElementById('comment')
+let bo = document.getElementById('body')
+	$('#sub').click('click', function(e){
+		e.preventDefault();
+		console.log('USER:', '{{request.user}}')
+		// console.log('USER:', user)
+		if ('{{request.user}}' == 'AnonymousUser'){
+			alert('Please sign in to comment')
+		}
+		else {
+			$.ajax({
+				type:'POST',
+				url: '/post/{{post.slug}}/',
+				data: {
+					'body': $('#body').val(),
+					'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
+				},
+				success: function(res){
+					console.log(res.body)
+
+					com.insertAdjacentHTML(`beforeend`, 
+					
+					`
+					<div class="flex mb-5 mt-10 pb-5 items-center" style="border-bottom: 1px solid #ccc;">
+					<img src="{{request.user.userprofile.imageURL}}" class="mr-6" style="height: 80px; border-radius: 100%;" width="80px" alt="">
+									<div>
+										<p class="name font-bold text-sm">${res.user}</p>
+										<p class="date text-gray-400 text-sm">${res.created}</p>
+										<p class="text">
+											${res.body}
+										</p>
+									</div>
+									</div>
+					`
+					)
+					$('#dis').css("display", "none");
+					document.getElementById('body').value = ''
+				},	
+				error: function(res){
+					console.log(res)
+				}
+			})
+		}
+	})
+
+
+</script>
+</html>
+{% endblock %}

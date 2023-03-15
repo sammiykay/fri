@@ -1,0 +1,21 @@
+{% extends 'blog/adminbase.html' %}
+{% block content %}
+{% load static %}
+		<div class="main-content">
+			<div class="info">
+				{% for users in user %}
+				<div class="user-info">
+					<img src="{{users.userprofile.imageURL}}">
+					<div class="text">
+						<h4>{{users.username}}</h4>
+						<p>{{users.email}}</p>
+						<a href="/users-info/{{users.id}}/"><button>View More</button></a>
+					</div>
+				</div>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+	{% endblock %}
+</body>
+</html>

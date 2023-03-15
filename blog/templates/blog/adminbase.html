@@ -1,0 +1,35 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device/width, initial-scale = 1.0">
+	<title>Admin Panel</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/adminstyle.css' %}">
+</head>
+<body>
+	<div class="main">
+		<div class="sidebar">
+			<div class="img">
+				<img src="{% static 'images/avatar.png' %}">
+				<h4>Admin Panel</h4>
+			</div>
+			<ul>
+				<li><a href="{% url 'custom_admin' %}">Users Post</a></li>
+				<li><a href="{% url 'custom_admin_category' %}">Category</a></li>
+				<li><a href="{% url 'user_info' %}">Users Info</a></li>
+				<li><a href="{% url 'admin_registration' %}">Register User</a></li>
+				<li><a href="{% url 'admin_add_post' %}">Add Post</a></li>
+				<li><a href="{% url 'home' %}">Go To Home</a></li>
+				<li><a href="{% url 'logout' %}">Logout</a></li>
+			</ul>
+		</div>
+		{% if request.user.is_superuser %}
+		{% block content %}
+		{% endblock %}
+		{% else %}
+		No t Admin manager
+		{% endif %}
+</body>
+</html>

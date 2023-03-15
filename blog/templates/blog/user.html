@@ -1,0 +1,79 @@
+{% extends 'blog/profile_base.html' %}
+{% block content %}
+{% load static %}
+<script type="text/javascript" src="{% static 'js/jquery.js' %}"></script>
+<link rel="stylesheet" type="text/css" href="{% static 'css/userprofile.css' %}">
+<div class="container">
+	<div class="profile-settings">
+		<div class="pic">
+			<img src="{{user.userprofile.imageURL}}">
+		</div>
+		<div class="info">
+			<div class="name">
+				<h1>Oke Samson</h1>
+				<div class="links">
+					<ul>
+						<li >
+						<a class="active" href="#">My Profile</a>
+					</li>
+					<li class="active">
+						<a href="{% url 'editprofile' %}">Edit Profile</a>
+					</li>
+					<li>
+						<a href="{% url 'change_password' %}">Change Password</a>
+					</li>
+					<li>
+						<a href="{% url 'my-post' %}">My Post</a>
+					</li>
+					<li>
+						<a href="{% url 'logout' %}">Logout</a>
+					</li>
+					</ul>
+				</div>
+				<div class="about">
+					<p>{{user.userprofile.about_you}}</p>
+				</div>	
+			</div>
+			<div class="details">
+				<div>
+						<p class="head">User ID:</p>
+						<p>{{user.id}}</p>
+					</div>
+					<div>
+						<p class="head">Username:</p>
+						<p>{{user.username}}</p>
+					</div>
+					<div>
+						<p class="head">First name:</p>
+						<p>{{user.first_name}}</p>
+					</div>
+					<div>
+						<p class="head">Last name:</p>
+						<p>{{user.last_name}}</p>
+					</div>
+					<div>
+						<p class="head">Email:</p>
+						<p>{{user.email}}</p>
+					</div>
+					<div>
+						<p class="head">Gender:</p>
+						<p>{{user.userprofile.gender}}</p>
+					</div>
+					<div>
+						<p class="head">Website link:</p>
+						<p>{{user.userprofile.website_link}}</p>
+					</div>
+					<div>
+						<p class="head">Linkedin:</p>
+						<p>{{user.userprofile.linkedin}}</p>
+					</div>
+					<div>
+						<p class="head">Facebook:</p>
+						<p>{{user.userprofile.facebook}}</p>
+					</div>
+					<div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

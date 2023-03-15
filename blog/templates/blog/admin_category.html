@@ -1,0 +1,35 @@
+{% extends 'blog/adminbase.html' %}
+{% block content %}
+		<div class="main-content">
+				{% if messages %}
+				{% for message in messages %}
+			<div class="success">
+            	<p>{{message}}</p>
+            </div>
+            	{% endfor %}
+				{% endif %}
+                <table>
+                    <tr>
+                        <th>Category</th>
+                        <th>Image</th>
+                        <th>Approve</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                    {% for cat in category %}
+                    <tr>
+                        <td>{{cat.category_name}}</td>
+                        <td>{{cat.imageURL}}</td>
+                        <td>{{cat.approve}}</td>
+                        <td><a href="/custom-admin/{{posts.slug}}/update"><button class="edit">Edit</button></a></td>
+                        <td><a href="/custom-admin/{{posts.slug}}/delete"><button class="delete">Delete</button></a></td>
+                    </tr>
+                    {% endfor %}        
+                </table>
+                <h5>{{category.count}} Category{{category|pluralize}}</h5>
+                
+		</div>
+	</div>
+	{% endblock %}
+</body>
+</html>

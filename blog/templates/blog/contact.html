@@ -1,0 +1,32 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+{% block content %}
+<!-- <link rel="stylesheet" type="text/css" href="{% static 'css/carousel.css' %}"> -->
+<link rel="stylesheet" type="text/css" href="{% static 'css/contact.css' %}">
+<div class="container">
+	<div class="main">
+		<div id="contact">
+			<div class="contact">
+				<h2>Contact Us</h2>
+				<p>We take our commitment to our users seriously. If you need our help with your user account, have questions about how to use the platform or are you experiencing technical difficukties, don't hesitate to contact us </p>
+				<div class="info">
+					<p>P +2349071502233</p>
+					<p>E Kayodeola47@gmail.com</p>
+				</div>
+			</div>
+		</div>
+		<div class="form">
+			<form method="POST">
+				{% csrf_token %}
+				<label>Name</label><br>
+				<input type="text" name="name" placeholder="Enter your name" required><br>
+				<label>Email</label><br>
+				<input type="email" name="email" placeholder="Enter your Email" required><br>
+				<label>Content</label><br>
+				<textarea name="body" required></textarea><br>
+				<button class="btn btn-success">Submit</button>
+			</form>
+		</div>
+	</div>
+</div>
+{% endblock %}

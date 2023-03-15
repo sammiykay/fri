@@ -1,0 +1,49 @@
+{% extends 'blog/adminbase.html' %}
+{% block content %}
+{% load static %}
+<script src="{% static 'js/jquery.js' %}"></script>
+		<div class="main-content">
+				{% if messages %}
+				{% for message in messages %}
+			<div class="success">
+            	<p>{{message}}</p>
+            </div>
+            	{% endfor %}
+				{% endif %}
+                <table>
+                    <tr>
+                        <th>ID</th>
+                        <th>Users</th>
+                        <th>Category</th>
+                        <th>Title</th>
+                        <th>Publish</th>
+                        <th>Likes</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                    {% for posts in post %}
+                    <tr>
+                        <td>{{posts.id}}</td>
+                        <td>{{posts.user.username.capitalize}}</td>
+                        <td>{{posts.category.capitalize}}</td>
+                        <td>{{posts.title.capitalize}}</td>
+                        <td>{{posts.publish}}</td>
+                        <td>{{posts.likes.count}}</td>
+                        <td><a href="/custom-admin/{{posts.slug}}/update"><button class="edit">Edit</button></a></td>
+                        <td><a href="/custom-admin/{{posts.slug}}/delete"><button class="delete">Delete</button></a></td>
+                    </tr>
+                    {% endfor %}        
+                </table>
+                <h5>{{post.count}} Post{{post|pluralize}}</h5>
+                
+		</div>
+	</div>
+	{% endblock %}
+</body>
+</html>
+<script>
+    function closeDiv(){
+        $('.success').fadeOut(500)
+    }
+    setTimeout('closeDiv()', 3000)
+</script>

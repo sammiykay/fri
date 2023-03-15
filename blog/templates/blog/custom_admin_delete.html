@@ -1,0 +1,14 @@
+{% extends 'blog/adminbase.html' %}
+{% block content %}
+<div class="main-content">
+	<div class="admin_delete">
+	    <form method="POST">
+	        {% csrf_token %}
+	        <p>Are You Sure You Want To Delete <strong>{{post.title.capitalize}}</strong> post by <strong>{{post.user.username.capitalize}}</strong></p>
+	        <div class="but">	
+	       		 <button>Yes, I'm sure</button><a href="/custom-admin">No, take me back</a>
+	    	</div>
+	    </form>
+	</div>
+</div>
+{% endblock %}

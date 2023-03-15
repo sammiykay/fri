@@ -1,0 +1,122 @@
+{% extends 'blog/profile_base.html' %}
+{% load static %}
+{% block content %}
+{% load static %}
+<title>Change Password</title>
+<script type="text/javascript" src="{% static 'js/jquery.js' %}"></script>
+<link rel="stylesheet" type="text/css" href="{% static 'css/userprofile.css' %}">
+<div class="container">
+	<div class="profile-settings">
+		<div class="pic">
+			<img src="{{user.userprofile.imageURL}}">
+		</div>
+		<div class="info">
+			<div class="name">
+				<h1>Oke Samson</h1>
+				<div class="links">
+					<ul>
+						<li>
+						<a href="{% url 'userprofile' %}">My Profile</a>
+					</li>
+					<li>
+						<a href="{% url 'editprofile' %}">Edit Profile</a>
+					</li>
+					<li>
+						<a class="active" href="#">Change Password</a>
+					</li>
+					<li>
+						<a href="{% url 'my-post' %}">My Post</a>
+					</li>
+					<li>
+						<a href="{% url 'logout' %}">Logout</a>
+					</li>
+					</ul>
+				</div>	
+			</div>
+			<div class="main-content">
+	<div class="content2">
+		<div class="head">
+			<h2>Change Password</h2>
+		</div>
+		{% if msg %}
+		<p class="{{col}}">{{msg}}</p>
+		{% endif %}
+		{% if msz %}
+		<p class="{{suc}}">{{msz}}</p>
+		{% endif %}
+		<div class="main-form">
+			<form method="POST">
+				{% csrf_token %}
+				<p>Current Password<span class="red">*</span></p>
+				<input type="password" placeholder="Current Password" name="cpwd" id="cpwd" required>
+				<p>New Password<span class="red">*</span></p>
+				<span id="view" style="display: none;">Password must be atleast 8 characters</span>
+				<span id="none" style="display: none;">Password does not match</span>
+				<input type="password" placeholder="New Password" onkeyup="on()" name="pwd1" id="pwd1" required>
+				<p>Confirm New Password<span class="red">*</span></p>
+				<span id="none" style="display: none;">Password does not match</span>
+				<input type="password" placeholder="Confirm New Password" onkeyup="on()" name="pwd2" id="pwd2" required><br>
+				<input type="submit" id="btn">
+			</form>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+	function on(){
+		let p1 = $('#pwd1').val();
+		let p2 = $('#pwd2').val();
+		// if (p2 == p1){
+		// 	// $('#pwd1').css("border", "1px solid green");
+		// 	// $('#pwd2').css('border', '1px solid green');
+		// 	$('#btn').removeAttr('disabled');
+		// 	$('#none').css('display', 'none');
+
+		// }	
+		// else {
+		// 	// $('#pwd1').css('border', '1px solid red');
+		// 	// $('#pwd2').css('border', '1px solid red');
+		// 	$('#btn').attr('disabled', 'disabled');
+		// 	$('#none').css('display', 'block')
+		// }
+		// if (p1.length  8 && p1 == p2) {
+		// 	$('#view').css('display', 'block');
+		// 	$('#btn').attr('disabled', 'disabled');
+		// }
+		// else {
+		// 	$('#view').css('display', 'none');
+		// 	$('#btn').removeAttr('disabled');
+
+		// }
+
+
+		if (p1 === p2) {
+			$('#pwd1').css("border", "1px solid #ccc");
+			$('#pwd2').css('border', '1px solid #ccc');
+			$('#btn').removeAttr('disabled');
+			$('#none').css('display', 'none');
+			$('#view').css('display', 'none');
+		}
+		else {
+			$('#pwd1').css('border', '1px solid red');
+			$('#pwd2').css('border', '1px solid red');
+			$('#btn').attr('disabled', 'disabled');
+			$('#none').css('display', 'block')
+		}
+
+		if (p1.length < 8) {
+			$('#view').css('display', 'block');
+
+		}
+		else {
+			$('#view').css('display', 'none');
+
+		}
+	}
+</script>
+
+</div>
+</div>
+</div>
+
+{% endblock %}

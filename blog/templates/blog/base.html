@@ -1,0 +1,462 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<script type="text/javascript" src="{% static 'js/jquery.js' %}"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/tailwind.css' %}">
+	
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+	<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/duotone.css" integrity="sha384-R3QzTxyukP03CMqKFe0ssp5wUvBPEyy9ZspCB+Y01fEjhMwcXixTyeot+S40+AjZ" crossorigin="anonymous"/>
+	<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/fontawesome.css" integrity="sha384-eHoocPgXsiuZh+Yy6+7DsKAerLXyJmu2Hadh4QYyt+8v86geixVYwFqUvMU8X90l" crossorigin="anonymous"/>
+	<style type="text/css">
+	
+	body {
+		overflow-x: hidden;
+	}
+	.nav{
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		overflow: hidden;
+		/* box-shadow: 0px 0px 1px 0px rgba(0,0,0,0.45); */
+		border-bottom: 1px solid #ccc;
+		padding: 0px 2rem;
+		align-items: center;
+		/*border-bottom: 1px solid black;*/
+	}
+
+	.logo a{
+		text-decoration: none;
+		font-size: 34px;
+		color: black;
+		letter-spacing: 6px;
+
+	}
+	.nav .nav-links ul{
+		display: flex;
+		list-style: none;
+		margin: 0px;
+	}
+	.nav-links li {
+		padding: 1.6rem 1.7rem;
+
+	}
+	.nav-links a {
+		text-decoration: none;
+		color: black;
+	}
+	.nav-profile {
+		border: 1px solid #ccc;
+		width: 180px;
+		position: absolute;
+		background-color: #ffffff;
+		left: 85%;
+		display: none;
+		transition: .5s;
+	}
+	.nav-profile ul {
+		list-style: none;
+	}
+	.nav-profile ul li {
+		align-items: center;
+	}
+
+	.nav-profile ul li a {
+		text-decoration: none;
+		color: black;
+		display: block;
+		padding: 10px 18px;
+		border-bottom: 1px solid #ccc;
+	}
+	.nav-profile ul li a:hover {
+		background-color: rgba(0,0,0,0.1);
+	}
+	.nav-profile.toggle {
+		display: block;
+		transition: .5s;
+	}
+	.image-profile{
+		cursor: pointer;
+	}
+	.search {
+		display: flex;
+		padding: 0rem 0rem;
+		align-items: center;
+	}
+	.search input {
+		margin-right: 10px;
+		padding: 6px 10px;
+		height: 40px;
+	}
+	.search img {
+		width: 40px;
+		border-radius: 40%;
+		margin-right: 6px;
+	}
+	.search li {
+		list-style: none;
+		padding-left: 17px;
+	}
+	.search li a{
+		text-decoration: none;
+		color: black;
+	}
+	.burger {
+		float: right;
+		margin-top: 9px;
+		display: none;
+	}
+	.burg1,.burg2,.burg3 {
+		width: 26px;
+		height: 3.4px;
+		background-color: black;
+		margin-top: 4px;
+		transition: .7s;
+	}
+/*	.user-profile {
+		display: flex;
+		align-items: center;
+
+	}*/
+	.cursor {
+		cursor: pointer;
+	}
+	.svgg {
+		width: 23px;
+	}
+	#footer {
+			background-color: black;
+			min-height: 40vh;
+			padding: 60px;
+			margin-top: 30px;
+		}
+		.footer {
+			display: grid;
+			color: white;
+			grid-template-columns: 1fr 1.3fr 1fr;
+			grid-gap: 50px;
+		}
+		.footer .about {
+			line-height: 1.9rem;
+		}
+		.footer .facebook .img{
+			display: grid;
+			grid-gap: 20px;
+			grid-template-columns: 1fr 1fr 1fr;
+
+		}
+		.footer .facebook .img div{
+			overflow: hidden;
+		}
+		.footer .facebook img {
+			width: 100%;
+			transition: .5s;
+		}
+		.footer .facebook img:hover {
+			transform: scale(1.5);
+			transition: .5s;
+		}
+		#footer .copyright {
+			text-align: center;
+			color: white;
+			margin-top: 30px;
+			font-size: 20px;
+		}
+	
+	@media only screen and (max-width: 920px) {
+		
+		.newsletter input[type='submit']{
+			width: 405px;	
+			margin: 10px auto;
+		}
+		.sidebar .newsletter {
+			display: none;
+		}
+
+	}
+	
+
+	@media only screen and (max-width: 910px){
+		.nav {
+			flex-direction: column;
+			align-items: initial;
+			margin-top: 18px;
+		}
+		.footer {
+			grid-template-columns: 1fr 1fr;
+		}	
+		.logo {
+			margin-bottom: 10px;
+		}
+		.nav-links {
+			display: none;
+			transition: .5s;
+		}
+		.search {
+			display: none;
+		}
+		.nav-links.more {
+			display: block;
+		}
+		.nav-links ul {
+			flex-direction: column;
+		}
+		.nav-links ul li{
+			padding: 0.75rem 0rem;
+		}
+		.nav-links ul li a {
+			display: block;
+			padding: 0.75rem 0.5rem;
+		}
+		.nav-links ul li a:hover {
+			background-color: rgba(0,0,0,0.1);
+		}
+		.burg1.burg {
+			transform: rotate(-45deg) translate(-5px, 6px);
+			transition: .7s;
+		}
+		.burg2.burg {
+			opacity: 0;
+			transition: .7s;
+		}
+		.burg3.burg {
+			transform: rotate(45deg) translate(-5px, -6px);
+			transition: .7s;
+		}
+		.search.burg {
+			display: flex;
+			align-items: center;
+			margin-bottom: 10px;
+		}
+		.search .image{
+			margin-top: 10px;
+		}
+		.search li {
+			padding: 10px;
+		}
+		.search {
+			padding: 0.75rem 0.6rem;
+
+		}
+		.burger {
+			display: block;
+		}
+		.nav-profile {
+			left:2%;
+		}
+	}
+	@media only screen and (max-width: 710px) {
+			.footer {
+				grid-template-columns: 1fr;
+			}
+		}
+		@media only screen and (max-width: 580px) {
+			#footer .copyright {
+				font-size: 18px;
+				line-height: 1.5rem;
+			}
+			
+
+		}
+@media only screen and (max-width: 320px) { 
+		.footer .facebook .img{
+
+				grid-template-columns: 1fr 1fr;
+		}
+			#footer {
+				padding: 20px;
+			}
+		}
+
+    * {
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    }
+        .bac {
+            height: 350px; 
+            background-repeat: no-repeat; 
+            background-size: cover; 
+            background-position: center;
+            width: 100%;
+            flex-direction: column; 
+            justify-content: space-between;
+            padding:25px;
+            border-radius: 4px;
+        }
+        .main {
+            border-radius: 4px;
+            margin-top: 37px;
+        }
+        .main img {
+            height: 280px;
+        }
+        .most {
+            margin-top: 37px;
+
+        }
+        .most img {
+            width: 140px;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+	
+	<body>
+		<div class="head">
+			<div class="nav" id="search">
+				<div class="logo">
+					<a href="{% url 'home' %}">Blooger</a>
+				<div class="burger" onclick="tog()">
+					<div class="burg1"></div>
+					<div class="burg2"></div>
+					<div class="burg3"></div>
+				</div>
+				</div>
+				<div class="nav-links">
+					<ul>
+						<li class="list"><a href="{% url 'home' %}">Home</a></li>
+						<li class="list"><a href="{% url 'post' %}">Posts</a></li>
+						<li class="list"><a href="{% url 'categories' %}">Categories</a></li>
+						<li class="list"><a href="#">Contact</a></li>
+					</ul>
+				</div>
+				<div class="search">
+					{% if user.is_authenticated %}
+					<img src="{{user.userprofile.imageURL}}" class="image-profile" onclick="profile()"><p onclick="profile()" class="cursor">{{request.user.username.capitalize}}</p>
+					<!-- <p>no</p> -->
+					{% else %}
+					<li class="list"><a href="{% url 'register' %}">Register</a></li>
+					<li class="list"><a href="{% url 'login' %}">Login</a></li>
+					{% endif %}
+				</div>
+			</div>
+		</div>
+		<div class="nav-profile">
+			<ul>
+				{% if request.user.is_superuser %}
+				<li><a class="user-profile" href="{% url 'userprofile' %}"><svg xmlns="http://www.w3.org/2000/svg" class="svgg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+				
+	  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+	</svg>Profile</a></li>
+				<li><a href="{% url 'logout' %}"><svg class="svgg" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+	  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+	</svg>Logout</a></li>
+	<li><a href="{% url 'custom_admin' %}"><svg xmlns="http://www.w3.org/2000/svg" class="svgg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+				
+	  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+	</svg>Custom Admin</a></li>
+	{% else %}
+	<li><a class="user-profile" href="{% url 'userprofile' %}"><svg xmlns="http://www.w3.org/2000/svg" class="svgg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+				
+	  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+	</svg>Profile</a></li>
+				<li><a href="{% url 'logout' %}"><svg class="svgg" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+	  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+	</svg>Logout</a></li>
+	{% endif %}
+			</ul>
+		</div>
+		
+	{% block content %}
+	{% endblock %}
+			<div id="footer">
+			<div class="footer">
+				<div class="about">
+					<h3>About me</h3>
+					<p>My name is Oke Samson Olayinka. A student of Adekunle Ajasin University Akoko (AAUA). I am a full stack web developer</p>
+				</div>
+	
+				<div class="facebook">
+					<h2>Facebook</h2><br>
+					<div class="img">
+						<div>
+							<img class="img" src="{% static './images/bat.jpg' %}">
+						</div>
+						<div>
+							<img class="img" src="{% static './images/p1.jpg' %}">
+						</div>
+						<div>
+							<img class="img" src="{% static './images/p4.jpg' %}">
+						</div>
+						<div>
+							<img class="img" src="{% static './images/p6.jpg' %}">
+						</div>
+						<div>
+							<img class="img" src="{% static './images/p5.jpg' %}">
+						</div>
+						<div>
+							<img class="img" src="{% static './images/p3.jpg' %}">
+						</div>
+	
+						
+					</div>
+				</div>
+				<div class="follow-us">
+					<h2>Follow me</h2>
+					<p>Lets Be social</p>
+					<div class="mt-3">
+						<a target="_blank" href="https://facebook.com/sammiykay"><i class="fab transition hover:text-blue-600 fa-facebook-f"></i></a>
+						<a target="_blank" href="https://instagram.com/kaysammie1"><i class="fab fa-instagram transition hover:text-red-300 ml-1"></i></a>
+						<a target="_blank" href="https://twitter.com/sammiykay"><i class="fab fa-twitter transition hover:text-blue-400 ml-1"></i></a>
+						<a target="_blank" href="https://youtube.com/sammiykay"><i class="fab fa-youtube ml-1 transition hover:text-red-600"></i></a>
+					</div>
+				</div>
+			</div>
+				<div class="copyright">
+					<p>Copyright @2022 All Rights reserved | made by Oke Samson</p>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript">
+			function tog() {
+				var x = document.querySelector('.nav-links')
+				var y = document.querySelector('.burg1')
+				var z = document.querySelector('.burg3')
+				var a = document.querySelector('.burg2')
+				var b = document.querySelector('.search')
+				x.classList.toggle('more')
+				y.classList.toggle('burg')
+				a.classList.toggle('burg')
+				b.classList.toggle('burg')
+				z.classList.toggle('burg')
+			}
+			function profile() {
+				let x = document.querySelector('.nav-profile')
+				x.classList.toggle('toggle')
+			}
+			$('.for-you-text').html(function(index, currentText) {
+				let max_length =  $(this).attr('data-maxlength');
+				console.log(max_length)
+				if (currentText.length > max_length) {
+					return currentText.substr(0, max_length) + '<strong>...</strong>' 
+				}
+				else{
+					return currentText
+	
+				}
+		
+			})
+			
+			// var setTheme = localStorage.getItem('theme')
+			// if (setTheme == '{% static "css/light_mode.css" %}') {
+			// 	light_mode()
+			// }
+			// else{
+			// 	dark_mode()
+			// }
+			// function light_mode() {
+			// 	document.getElementById('stylesheet').href = '{% static "css/light_mode.css" %}'
+			// 	localStorage.setItem('theme', '{% static "css/light_mode.css" %}')
+			// }
+			// function dark_mode() {
+			// 	document.getElementById('stylesheet').href = '{% static "css/dark_mode.css" %}'
+			// 	localStorage.setItem('theme', '{% static "css/dark_mode.css" %}')
+			// }
+	
+		</script>
+	
+
+	</body>

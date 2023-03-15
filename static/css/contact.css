@@ -1,0 +1,41 @@
+.container {
+	width: 65%;
+	margin: auto;
+
+	}
+.main {
+	display: grid;
+	margin-top: 20px;
+	grid-template-columns: 67% 33%;
+}
+
+.main .contact p{
+	margin-top: 20px;
+	line-height: 1.7rem;
+	width: 63%;
+	font-size: 15px;
+}
+.main .contact .info{
+	margin-top: 15px;
+}
+.main .contact .info p{
+	margin-top: 5px;
+}
+.form {
+}
+.form form input {
+	width: 250px;
+	padding: 8px 20px;
+	margin: 7px 0px;
+}
+.form form textarea {
+	width: 290px;
+	margin: 7px 0px;
+	height: 100px;
+	padding: 5px;
+	max-width: 280px;
+	min-width: 280px;
+}
+.form form button {
+	padding:6px 20px;
+}

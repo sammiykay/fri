@@ -1,0 +1,377 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+{% load static %}
+<title>{{user.username}} Profile</title>
+<style type="text/css">
+	.flex {
+		display: flex;
+		width: 80%;
+		margin: 0px auto;
+		justify-content: space-around;
+	}
+	.main {
+		width: 400px;
+		margin-top: 10px;	
+	}
+	.profile-info {
+		box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+		width: 400px;
+	}
+	.profile-info img {
+		width: 400px;
+    }   
+    .profile-info p.username {
+    	margin-top: -40px;
+    	font-weight: bold;
+    	font-size: 20px;
+    	margin-left: 10px;
+    } 
+    .detail{
+    	margin-top: 20px;
+    	padding: 20px 12px;
+    }
+    .detail p {
+    	font-size: 15px;
+    }
+    span {
+    	padding-top: 20px;
+    }
+    .social-media ul{
+    	width: 100%;
+    	display: flex;
+    	justify-content: space-around;
+
+    }
+    .social-media ul li{
+    	list-style: none;
+    }
+    .login-box{
+    	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    	padding: 17px;
+    	margin-top: 10px;
+    }
+    .message p {
+    	font-size: 12px;
+    	text-align: center;
+    	padding: 9px;
+    	background-color: #DDFFDD;
+    }
+    form {
+    	width: 300px;
+    }
+    form p {
+    	margin: 2px 0px;
+    }
+	select {
+		width: 277px;;
+		padding: 7px 12px;
+    	border: 1px solid #ccc;
+	}
+    input {
+    	width: 250px;
+    	padding: 7px 12px;
+    	margin-top: 5px;
+    	border: 1px solid #ccc;
+    }
+    button {
+    	margin-top: 10px;
+    	padding: 6px 18px;
+    }
+    .helptext {
+    	display: none;
+    }
+	</style>
+	
+</head>
+<body>
+	<div class="container">
+		<div class="flex">
+			<div class="main">
+				<div class="message">
+					{% if messages %}
+					{% for message in messages %}
+					<p>{{message}}</p>
+					{% endfor %}
+					{% endif %}
+				</div>
+				<div class="profile-info">
+					<div class="img">
+						<img src="{{user.userprofile.imageURL}}">
+						<p class="username">{{user.username}}</p>
+					</div>
+					<div class="detail">
+						<strong>FIRST NAME:</strong> <span> {{user.first_name}}</span><br><br>
+						<strong>LAST NAME:</strong> <span> {{user.last_name}}</span><br><br>
+						<strong>GENDER:</strong> <span> {{user.userprofile.gender}}</span><br><br>
+						<strong>EMAIL:</strong> <span> {{user.email}}</span><br><br>
+						<strong>DATE CREATED:</strong> <span> {{user.date_joined}}</span><br><br><br>
+						<div class="social-media">
+							<ul>
+								<a href="{{user.userprofile.twitter}}"><li><svg class="c-nav--footer__svgicon" width="20" height="20" version="1" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path d="M31.993 6.077c-1.177.523-2.44.876-3.77 1.033 1.355-.812 2.396-2.098 2.887-3.63-1.27.75-2.673 1.3-4.168 1.592C25.744 3.797 24.038 3 22.15 3c-3.626 0-6.563 2.938-6.563 6.563 0 .514.057 1.016.17 1.496C10.3 10.783 5.464 8.17 2.227 4.2c-.565.97-.89 2.098-.89 3.3 0 2.28 1.16 4.287 2.92 5.465-1.076-.035-2.088-.33-2.973-.82v.08c0 3.182 2.26 5.835 5.264 6.438-.55.15-1.13.23-1.73.23-.423 0-.833-.04-1.233-.117.834 2.606 3.26 4.504 6.13 4.558-2.245 1.76-5.075 2.81-8.15 2.81-.53 0-1.053-.03-1.566-.09C2.905 27.914 6.355 29 10.062 29c12.072 0 18.675-10 18.675-18.675 0-.284-.008-.568-.02-.85 1.283-.925 2.395-2.08 3.276-3.398z"></path></svg></li></a>
+								<a href="{{user.userprofile.facebook}}"><li><svg class="c-nav--footer__svgicon" width="20" height="20" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M15.115 0H.885A.883.883 0 0 0 0 .885v14.23c0 .49.395.885.885.885h7.659V9.803h-2.09v-2.4h2.09V5.62c0-2.069 1.27-3.189 3.104-3.189.875 0 1.643.053 1.867.096v2.155h-1.291c-1.003 0-1.184.469-1.184 1.173v1.547h2.379l-.31 2.4H11.04V16h4.075c.49 0 .885-.395.885-.885V.885A.883.883 0 0 0 15.115 0z" fill-rule="evenodd"></path></svg></li></a>
+								<a href="{{user.userprofile.youtube}}"><li><svg version="1" class="c-nav--footer__svgicon" width="20" height="20" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path d="M31.67 9.18s-.312-2.354-1.27-3.39c-1.218-1.358-2.58-1.366-3.206-1.443C22.717 4 16.002 4 16.002 4h-.015s-6.715 0-11.19.347c-.626.077-1.988.085-3.206 1.443C.635 6.826.32 9.18.32 9.18S0 11.94 0 14.7v2.59c0 2.762.32 5.522.32 5.522s.312 2.352 1.27 3.386c1.22 1.358 2.816 1.317 3.528 1.46 2.56.26 10.877.342 10.877.342s6.722-.012 11.2-.355c.624-.08 1.987-.088 3.204-1.446.956-1.036 1.27-3.388 1.27-3.388s.32-2.76.32-5.523V14.7c0-2.76-.32-5.522-.32-5.522z"></path><path fill="#FFF" d="M12 10v12l10-6"></path></svg>
+								</li></a>
+								<a href="{{user.userprofile.linkedin}}"><li><svg class="c-nav--footer__svgicon" width="20" height="20" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M14.816 0C15.466 0 16 .512 16 1.152v13.696c0 .63-.533 1.152-1.184 1.152H1.184C.534 16 0 15.477 0 14.848V1.152C0 .512.533 0 1.184 0zM3.563 4.96a1.382 1.382 0 0 0 0-2.763c-.768 0-1.376.619-1.376 1.376 0 .768.608 1.387 1.376 1.387zm10.069 4.49c0-2.058-.437-3.637-2.848-3.637-1.152 0-1.92.63-2.24 1.227h-.032V5.995H6.24v7.637h2.368V9.856c0-.992.181-1.963 1.419-1.963 1.216 0 1.237 1.142 1.237 2.027v3.712h2.368zM2.368 13.633h2.379V5.995H2.368z" fill-rule="evenodd"></path></svg></li></a>
+							</ul><br>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class=sub-main>
+				<div class="login-box">
+					<form method="POST" enctype="multipart/form-data">
+						{% csrf_token %}
+						{{u_form.as_p}}
+						{{p_form.as_p}}
+						<button type="submit">Update</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+{% endblock %}
+
+
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Registration</title>
+	<meta charset="utf-8">
+	<script src="/static/js/jquery.js"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<style type="text/css">
+		* {
+			padding: 0px;
+			margin: 0px;
+			font-family: sans-serif;
+		}
+		.container {
+			width: 100%;
+			display: flex;
+			justify-content: space-between;
+		}
+		.login-box {
+			width: 400px;
+			box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+			top: 42%;
+			left: 19%;
+			position: absolute;	
+			transform: translate(-40%,-40%);
+
+			}
+		.headform {
+			background-color: grey;
+			color: wheat;
+			height: 43px;
+			text-align: center;
+		}
+		.headform p {
+			padding-top: 13px;
+			letter-spacing: 0.1rem;
+		}
+		.form {
+			width: 100%;
+			margin: 0px auto;
+			padding: 0px 30px;
+		}
+		.label {
+			margin: 12px 0px 12px 0px;
+		}
+		.input, #id_username,#id_email, #id_password1,#id_password2,#id_first_name,#id_last_name {
+			width: 300px;
+			height: 30px;
+			outline: none;
+			padding: 0px 8px;
+		}
+		#id_password2, #id_password1, #id_email,#id_last_name {
+			margin-top: 1px;
+		}
+		#id_username {
+			margin-bottom: 1px;
+			margin-top: 1px; 
+		}
+		input[type='submit'] {
+			padding: 9px 20px;
+			margin-top: 12px;
+			margin-bottom: 12px;
+			color: wheat;
+			border: none;
+			background-color: grey;	
+			transition: .4s;
+			border-radius: 3px;
+		}
+		input[type='submit']:hover {
+			background-color: #808076;
+			transition: .4s;
+		}
+		.form p {
+			border-radius: 3px;
+			font-size: 18px;	
+			margin-top: 12px;
+			width: 285px;
+		}
+		.log p.reg {
+			text-align: center;
+			font-size: 25px;	
+			margin-top: 12px;
+			padding-top: 20px;
+			font-weight: bold;
+		}
+		.form a {
+			text-decoration: none;
+			margin-left: 12px;	
+			
+		}
+		.label p {
+			border: 1px solid #BA2121;
+			padding: 4px 9px;
+			border-radius: 3px;
+			font-size: 18px;
+			color: #BA2121;
+			text-align: center;
+			margin-top: 12px;
+			margin-bottom: 8px;
+			width: 300px;
+		}
+		.img {
+			width: 54%;
+		}
+		.img img {
+			width: 100%;
+			height: 100vh;
+		}
+		.red {
+			color: red;
+		}
+		#none, #view {
+			font-size: 13px;
+			color: red;
+		}
+
+		.label p {
+			border: 1px solid green;
+			padding: 4px 9px;
+			border-radius: 3px;
+			font-size: 18px;
+			color: green;
+			text-align: center;
+			margin-top: 12px;
+			margin-bottom: 8px;
+			width: 300px;
+		}
+		.label2 p {
+			border: 1px solid #BA2121;
+			padding: 4px 9px;
+			border-radius: 3px;
+			font-size: 18px;
+			color: #BA2121;
+			text-align: center;
+			margin-top: 12px;
+			margin-bottom: 8px;
+			width: 300px;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="log">	
+			<div class="login-box">
+				<p class="reg">Registration Form</p>
+				<form method="POST" id="form">
+					{% csrf_token %}
+					<div class="form">
+						<div class="label">
+							{% if messages %}
+							{% for msg in messages %}
+							<p>{{msg}}</p>
+							{% endfor %}
+							{% endif %}
+						</div>	
+					<p><label for="id_username">Username<span class="red">*</span></label>
+					<input type="text" name="username" maxlength="150" autofocus required id="id_username"></p>
+					
+					<p>
+						<label for="id_email">Email address<span class="red">*</span></label> 
+						<input type="email" name="email" maxlength="254" required id="id_email">
+					</p>
+					<p>
+						<p>Password<span class="red">*</span></p>
+							<span id="view" style="display: none;">Password must be atleast 8 characters</span>
+							<span id="none" style="display: none;">Password does not match</span>
+							<input type="password" name="password1" onkeyup="on()" autocomplete="new-password" required id="id_password1"> 
+							<p>Confirm Password<span class="red">*</span></p>
+							<span id="none" style="display: none;">Password does not match</span>
+							<input type="password" name="password1" onkeyup="on()" autocomplete="new-password" required id="id_password2"> 
+							<input type="submit" id="btn">
+						<a href="/login/">Login</a>
+					</div>
+				</form>
+			</div>
+		</div>
+		<div class="img">
+			<img src="/static/images/cloth.jpg">
+		</div>
+	</div>
+	<script>
+	// 	$(document).on('submit', '#form', function(e){
+	// 	e.preventDefault();
+		
+	// 	$.ajax({
+	// 		type: 'POST',
+	// 		url: '/register/',
+	// 		data: {
+				
+	// 			email: $('#id_email').val(),
+	// 			username: $('#id_username').val(),
+	// 			first_name: $('#id_first_name').val(),
+	// 			last_name: $('#id_last_name').val(),
+	// 			password1: $('#id_password1').val(),
+	// 			password2: $('#id_password2').val(),
+	// 			csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+	// 		},
+	// 		success:function(){
+	// 			alert('Submitted Successfully')
+	// 		}
+	// 		.then((data) =>{
+	//         window.location.href = '/login/'
+	//     })
+	// 	});
+
+	// })
+	function on(){
+		let p1 = $('#id_password1').val();
+		let p2 = $('#id_password2').val();
+		if (p1 === p2) {
+			$('#id_password1').css("border", "1px solid black");
+			$('#id_password2').css('border', '1px solid black');
+			$('#btn').css('opacity', '1');
+			$('#btn').removeAttr('disabled');
+			$('#none').css('display', 'none');
+			$('#view').css('display', 'none');
+		}
+		else {
+			$('#id_password1').css('border', '1px solid red');
+			$('#id_password2').css('border', '1px solid red');
+			$('#btn').attr('disabled', 'disabled');
+			$('#btn').css('opacity', '0.5');
+			$('#none').css('display', 'block')
+		}
+
+		if (p1.length < 8) {
+			$('#view').css('display', 'block');
+
+		}
+		else {
+			$('#view').css('display', 'none');
+
+		}
+	}
+
+	</script>
+</body>
+</html>

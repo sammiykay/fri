@@ -1,0 +1,171 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="{% static 'js/jquery.js' %}"></script>
+	<title>Sam Profile</title>
+	<style type="text/css">
+		* {
+			padding: 0px;
+			margin: 0px;
+			font-family: sans-serif;
+		}
+		.form {
+			width: 650px;
+			border-radius: 0px 0px 8px 8px;
+			border: 1px solid #ccc;
+			padding: 20px;
+			box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
+		}
+		h2 {
+			background-color: rgba(0,0,0,0.4);
+			border-radius: 8px 8px 0px 0px;
+			padding: 10px;
+			text-align: center;
+			width: 672px;
+				
+		}
+		#name {
+			display: inline-grid;
+			grid-template-columns: 1fr 1fr;
+			grid-gap: 30px;
+
+		}
+
+		#id_username,#id_first_name, #id_last_name, #id_email, #id_image, #id_facebook, #id_twitter, #id_linkedin, #id_youtube {
+			width: 290px;
+			border: 1px solid #ccc;
+			border-radius: 2px;
+			padding: 8px 5px;
+			margin-top: 4px;
+		}
+		select {
+			width: 303px;
+			border: 1px solid #ccc;
+			border-radius: 2px;
+			padding: 0px 5px;
+		}
+		button {
+			width: 100px;
+			padding: 8px 13px;
+		}
+		.gride {
+			display: inline-grid;
+			}
+		#name a {
+			display: none;
+		}
+	</style>
+</head>
+<body>
+	<form method="POST" id="form" enctype="multipart/form-data">
+		<h2>Users Profile Form</h2>
+		<div class="form">
+			{% csrf_token %}
+			<div id='name'>
+				<div class="gride">
+					{{u_form.username.label}}:
+					{{u_form.username}}
+				</div>
+				<div class="gride"> 
+					{{u_form.first_name.label}}:
+					{{u_form.first_name}}			
+				</div>	
+				<div class="gride">
+					{{u_form.last_name.label}}:
+					{{u_form.last_name}}
+				</div>
+				<div class="gride">
+					{{u_form.email.label}}:
+					{{u_form.email}}
+				</div>
+				<div class="gride">
+					{{p_form.image.label}}:
+					{{p_form.image}}
+				</div>
+				<div class="gride">
+					{{p_form.gender.label}}:
+					{{p_form.gender}}
+				</div>
+				<div class="gride">				
+					{{p_form.facebook.label}}:
+					{{p_form.facebook}}
+				</div>
+				<div class="gride">	
+					{{p_form.twitter.label}}:
+					{{p_form.twitter}}
+				</div>
+				<div class="gride">	
+					{{p_form.linkedin.label}}:
+					{{p_form.linkedin}}
+				</div>
+				<div class="gride">
+					{{p_form.youtube.label}}:
+					{{p_form.youtube}}
+				</div>
+			<button type="submit">Update</button>
+			</div>
+		</div> 	
+	</form>
+</body>
+<script type="text/javascript">
+	// document.getElementById('#form').addEventListener('change', save_data())
+
+	// 	function save_data(){
+	// 			var name =  $('#id_name').val();
+	// 			var email = $('#id_email').val();
+	// 			var username = $('#id_username').val();
+	// 			var first_name = $('#id_first_name').val();
+	// 			var last_name = $('#id_last_name').val();
+	// 			var image = $('#id_image').val();
+	// 			var gender = $('#id_gender').val();
+	// 			var facebook = $('#id_facebook').val();
+	// 			var youtube = $('#id_youtube').val();
+	// 			var twitter = $('#id_twitter').val();
+	// 			var linkedin = $('#id_linkedin').val();
+	// 			var token = '{{csrf_token}}';
+	// 	}
+		
+	// 	$.ajax({
+	// 		type: 'POST',
+	// 		headers: {'X-CSRFToken': token},
+	// 		data: {
+				
+	// 		},
+	// 		success:function(){
+
+	// 		}
+
+
+	$(document).on('submit', '#form', function(e){
+		e.preventDefault();
+		
+		$.ajax({
+			type: 'POST',
+			url: '/userprofile/',
+			data: {
+				name: $('#id_name').val(),
+				email: $('#id_email').val(),
+				username: $('#id_username').val(),
+				first_name: $('#id_first_name').val(),
+				last_name: $('#id_last_name').val(),
+				image: $('#id_image').val(),
+				gender: $('#id_gender').val(),
+				facebook: $('#id_facebook').val(),
+				youtube: $('#id_youtube').val(),
+				twitter: $('#id_twitter').val(),
+				linkedin: $('#id_linkedin').val(),
+				csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+			},
+			success:function(){
+				alert('Update Successfully')
+				location.reload()
+			}
+
+		});
+	})
+</script>
+</html>
+{% endblock %}

@@ -1,0 +1,102 @@
+{% extends 'blog/profile_base.html' %}
+{% block content %}
+{% load static %}
+<script type="text/javascript" src="{% static 'js/jquery.js' %}"></script>
+<link rel="stylesheet" type="text/css" href="{% static 'css/userprofile.css' %}">
+<div class="container">
+	<div class="profile-settings">
+		<div class="pic">
+			<img src="{{user.userprofile.imageURL}}">
+		</div>
+		<div class="info">
+			<div class="name">
+				<h1>Oke Samson</h1>
+				<div class="links">
+					<ul>
+						<li>
+						<a href="{% url 'userprofile' %}">My Profile</a>
+					</li>
+					<li>
+						<a class="active" href="#">Edit Profile</a>
+					</li>
+					<li>
+						<a href="{% url 'change_password' %}">Change Password</a>
+					</li>
+					<li>
+						<a href="{% url 'my-post' %}">My Post</a>
+					</li>
+					<li>
+						<a href="{% url 'logout' %}">Logout</a>
+					</li>
+					</ul>
+				</div>	
+			</div>
+			<div class="edit">
+			<form method="POST" enctype="multipart/form-data">
+				<div class="form">
+					{% csrf_token %}
+					{% if messages %}
+				{% for m in messages %}
+				<p class="red">{{m}}</p>
+				{% endfor %}
+				{% endif %}
+				{% if msz %}
+				<p style="color: green; margin: 2px 0px;">{{msz}}</p>
+				{% endif %}
+					<div id='name'>
+						<div class="gride">
+							{{u_form.username.label}}:<br>
+							{{u_form.username}}
+						</div>
+						<div class="gride"> 
+							{{u_form.first_name.label}}:<br>
+							{{u_form.first_name}}			
+						</div>	
+						<div class="gride">
+							{{u_form.last_name.label}}:<br>
+							{{u_form.last_name}}
+						</div>
+						<div class="gride">
+							{{u_form.email.label}}:<br>
+							{{u_form.email}}
+						</div>
+						<div class="gride">
+							Image: <br>
+							<input type="file" name="image" accept="image/*" id="id_image">
+						</div>
+						<div class="gride">
+							{{p_form.gender.label}}:<br>
+							{{p_form.gender}}
+						</div>
+						<div class="gride">				
+							{{p_form.website_link.label}}:<br>
+							{{p_form.website_link}}
+						</div>
+						<div class="gride">				
+							{{p_form.facebook.label}}:<br>
+							{{p_form.facebook}}
+						</div>
+						<div class="gride">	
+							{{p_form.twitter.label}}:<br>
+							{{p_form.twitter}}
+						</div>
+						<div class="gride">	
+							{{p_form.linkedin.label}}:<br>
+							{{p_form.linkedin}}
+						</div>
+					</div>
+						<div class="griding">
+							{{p_form.about_you.label}}:<br>
+							{{p_form.about_you}}
+						</div>
+						<div class="but">
+							<button type="submit">Update</button>
+						</div>
+				</div> 	
+			</form>
+		</div>
+		</div>
+	</div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,90 @@
+{% extends 'blog/adminbase.html' %}
+{% block content %}
+<style>
+        <style type="text/css">
+		* {
+			padding: 0px;
+			margin: 0px;
+			font-family: sans-serif;
+		}
+		#profile {
+			width: 700px;
+			background-color: rgba(0,0,0,0.05);
+			margin: 0px auto;
+		}
+		.form{
+			padding: 10px;
+		}
+		.form p {
+			font-size: 18px;
+			margin: 10px 0px;
+		}
+		
+		.cke_1 {
+			width: 655px!important;
+		}
+		input[type='text'],input[type='file'] {
+			padding: 10px 10px;
+			width: 640px;
+			border: 1px solid #ccc;
+			background-color: white;
+		}
+		label {
+			font-size: 15px;
+			
+		}
+		select {
+			padding: 10px 10px;
+			width: 660px;
+			border: 1px solid #ccc;
+			background-color: white;
+
+		}
+		textarea {
+			padding: 10px;
+			width: 440px;
+			border: 1px solid #ccc;
+			min-width: 440px;
+			max-width: 440px;
+			max-height: 190px;
+			min-height: 130px;
+		}
+		button {
+			padding: 6px 28px;
+			margin-top: 10px;
+		}
+	</style>
+</head>
+<body>
+    <div class="main-content">
+        <div id="profile">
+            <form method="POST" id="form" enctype="multipart/form-data">
+                <div class="form">
+                    {% csrf_token %}
+                    <!-- <p>Category:</p> -->
+                        <!-- <select name="category">
+                            <option>Fashion</option>
+                            <option>Science</option>
+                            <option>Technology</option>
+                            <option>Hacking</option>
+                            <option>Christain</option>
+                            <option>Talents</option>
+                            <option>News</option>
+                        </select>
+                    
+                    <p>Title:</p>
+                        <input type="text" name="title" required id="id_title">
+                    <p>Image: </p> 
+                        <input type="file" name="image" accept="image/*" required id="id_image">
+                    <p>Text: </p>
+                        <textarea name="text" required id="id_text"></textarea><br> -->
+                        {{form.media}}
+						{{form.as_p}}
+						{{c_form}}
+                    <button type="submit">Post</button>
+                </div> 	
+            </form>
+        </div>
+        </div>
+</body>
+{% endblock %}

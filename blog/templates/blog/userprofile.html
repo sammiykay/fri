@@ -1,0 +1,191 @@
+{% extends 'blog/profile_base.html' %}
+{% block content %}
+{% load static %}
+<script type="text/javascript" src="{% static 'js/jquery.js' %}"></script>
+<div class="profile-settings">
+		<div class="head-profile">
+			<div class="profile">
+				<h3>Profile Settings</h3>
+			</div>
+		</div>
+		<div class="nav-link">
+			<div class="profile">
+				<ul>
+
+					<li class="active">
+						<a href="#">My Profile</a>
+					</li>
+					<li>
+						<a href="{% url 'change_password' %}">Change Password</a>
+					</li>
+					<li>
+						<a href="{% url 'my-post' %}">My Post</a>
+					</li>
+					<li>
+						<a href="{% url 'logout' %}">Logout</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="profile">
+		<div class="main-profile">
+			<div class="pic">
+				<img src="{{user.userprofile.imageURL}}">
+			</div>
+			<div class="content">
+				{% if messages %}
+				{% for m in messages %}
+				<p class="red">{{m}}</p>
+				{% endfor %}
+				{% endif %}
+				{% if msz %}
+				<p>{{msz}}</p>
+				{% endif %}
+				<div class="details">
+					<div>
+						<p class="head">User ID:</p>
+						<p>{{user.id}}</p>
+					</div>
+					<div>
+						<p class="head">Username:</p>
+						<p>{{user.username}}</p>
+					</div>
+					<div>
+						<p class="head">First name:</p>
+						<p>{{user.first_name}}</p>
+					</div>
+					<div>
+						<p class="head">Last name:</p>
+						<p>{{user.last_name}}</p>
+					</div>
+					<div>
+						<p class="head">Gender:</p>
+						<p>{{user.userprofile.gender}}</p>
+					</div>
+					<div>
+						<p class="head">Email:</p>
+						<p>{{user.email}}</p>
+					</div>
+					<div>
+						<p class="head">Website link:</p>
+						<p>{{user.userprofile.website_link}}</p>
+					</div>
+					<div>
+						<p class="head">Linkedin:</p>
+						<p>{{user.userprofile.linkedin}}</p>
+					</div>
+					<div>
+						<p class="head">Facebook:</p>
+						<p>{{user.userprofile.facebook}}</p>
+					</div>
+					<div>
+						<p class="head">Twitter:</p>
+						<p>{{user.userprofile.twitter}}</p>
+						<button onclick="edit()">Edit Profile</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="edit">
+		<div class="main-content">
+			<form method="POST" enctype="multipart/form-data">
+			<div class="form">
+				{% csrf_token %}
+				<div id='name'>
+					<div class="gride">
+						{{u_form.username.label}}:<br>
+						{{u_form.username}}
+					</div>
+					<div class="gride"> 
+						{{u_form.first_name.label}}:<br>
+						{{u_form.first_name}}			
+					</div>	
+					<div class="gride">
+						{{u_form.last_name.label}}:<br>
+						{{u_form.last_name}}
+					</div>
+					<div class="gride">
+						{{u_form.email.label}}:<br>
+						{{u_form.email}}
+					</div>
+					<div class="gride">
+						Image: <br>
+						<input type="file" name="image" accept="image/*" id="id_image">
+					</div>
+					<div class="gride">
+						{{p_form.gender.label}}:<br>
+						{{p_form.gender}}
+					</div>
+					<div class="gride">				
+						{{p_form.website_link.label}}:<br>
+						{{p_form.website_link}}
+					</div>
+					<div class="gride">				
+						{{p_form.facebook.label}}:<br>
+						{{p_form.facebook}}
+					</div>
+					<div class="gride">	
+						{{p_form.twitter.label}}:<br>
+						{{p_form.twitter}}
+					</div>
+					<div class="gride">	
+						{{p_form.linkedin.label}}:<br>
+						{{p_form.linkedin}}
+					</div>
+				</div>
+					<div class="griding">
+						{{p_form.about_you.label}}:<br>
+						{{p_form.about_you}}
+					</div>
+					<div class="but">
+						<button type="submit" id="btn" class="btn btn-danger">Update</button>
+						<button type="submit" onclick="edit()">Cancel</button>
+					</div>
+			</div> 	
+		</form>
+	</div>
+	</div>
+
+
+<script type="text/javascript">
+	function edit() {
+		var e = document.querySelector('.form')
+		e.classList.toggle('toggle')
+	}
+
+		// $(document).ready(function(){
+		// 	$('#btn').click(function(){
+		// 		var formData =  new FormData();
+		// 		formData.append('username', $('#id_username').val())
+		// 		formData.append('first_name', $('#id_first_name').val())
+		// 		formData.append('last_name', $('#id_last_name').val())
+		// 		formData.append('email', $('#id_email').val())
+		// 		formData.append('gender', $('#id_gender').val())
+		// 		formData.append('website_link', $('#id_website_link').val())
+		// 		formData.append('facebook', $('#id_facebook').val())
+		// 		formData.append('twitter', $('#id_twitter').val())
+		// 		formData.append('linkedin', $('#id_linkedin').val())
+		// 		formData.append('about_you', $('#id_about_you').val())
+		// 		formData.append('image', $('#id_image')[0].files[0])
+		// 		formData.append('csrfmiddlewaretoken', '{{ csrf_token }}')
+			
+		// 		$.ajax({
+		// 		type: 'POST',
+		// 		url: "{% url 'userprofile' %}",
+		// 		data: formData,
+		// 		processData: false,
+		// 		contentType: false,
+		// 		enctype: 'multipart/form-data',
+		// 		success: function(){
+		// 			alert('Profile updated Successfully')
+		// 			location.reload()
+		// 		},
+		// })
+
+		// 	})
+		// });
+		
+</script>
+{% endblock %}

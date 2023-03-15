@@ -1,0 +1,70 @@
+
+<style>
+    ul li{
+		list-style: none;
+	}
+        .page a  {
+            text-decoration: none;
+            font-size: 18px;
+            display: block;
+            padding: 7px;
+            color: black;
+            transition: .5s;
+
+        }
+        .page a:hover {
+            background-color: rgba(0,0,0,0.1);
+            transition: .5s;
+        }
+        .page li {
+            border-right: 1px solid #ccc;
+            border-left: 1px solid #ccc;
+        }
+        .page ul {
+            display: flex;
+            align-items: center;
+            width: 80px;
+            justify-content: space-between;
+            box-shadow: 0px 0px 3px 1px rgba(0,0,0,0.45);
+            margin: 13px auto;
+        }
+
+        s        
+        
+    }
+</style>
+<div class="page">
+    <ul>
+        {% if page.has_previous %}
+        <li><a href="?page={{page.previous_page_number}}" class="previous">&laquo;</a></li>
+        {% endif %}
+        <li><a href="#">{{page.number}}</a></li>
+
+        {% if page.has_next %}
+        <li><a href="?page={{page.next_page_number}}" class="next">&raquo;</a></li>
+        {% endif %}
+    </ul>
+</div>
+
+<div class="page2">
+    <ul>
+        {% if page2.has_previous %}
+        <li><a href="?page={{page2.previous_page_number}}" class="previous">&laquo;</a></li>
+        {% endif %}
+        <li> {{page2.number}} {{page2.paginator.num_pages}}</li>
+        {% if page2.has_next %}
+        <li><a href="?page={{page2.next_page_number}}" class="next">&raquo;</a></li>
+        {% endif %}
+    </ul>
+</div>
+<div class="page2">
+    <ul>
+        {% if page3.has_previous %}
+        <li><a href="?page={{page2.previous_page_number}}" class="previous">Previous</a></li>
+        {% endif %}
+        <li> {{page3.number}} {{page2.paginator.num_pages}}</li>
+        {% if page3.has_next %}
+        <li><a href="?page={{page2.next_page_number}}" class="next">Next</a></li>
+        {% endif %}
+    </ul>
+</div>

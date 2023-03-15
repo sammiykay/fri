@@ -1,0 +1,29 @@
+{% load static %}
+
+
+
+   <!--  <div>
+        <input type="hidden" id="like" name="post_id" value="{{posts.id}}" >
+    {% if user not in posts.likes.all %}
+    <button class="but" id="like" type="submit"><img src="{% static 'images/unlike.png' %}"></button>
+    {% else %}
+    <button class="but" id="like" type="submit"><img src="{% static 'images/like.png' %}"></button>
+    
+    {% endif %}
+    <p id="like">{{posts.likes.count}}sammie</p>
+    </div> -->
+
+<form action="{% url 'like' %}" class="form" id="form"  method="POST">
+                                        {% csrf_token %}
+                                        <div id="like">
+                                            <input type="hidden" class="input" name="post_id" value="{{posts.id}}" >
+                                        {% if user not in posts.likes.all %}
+                                        <button class="but" id="like" type="submit"><img src="{% static 'images/unlike.png' %}"></button>
+                                        {% else %}
+                                        <button class="but" id="like" type="submit"><img src="{% static 'images/like.png' %}"></button>
+                                        
+                                        {% endif %}
+                                        {{posts.likes.count}}
+                                        </div>
+                                    </form>
+

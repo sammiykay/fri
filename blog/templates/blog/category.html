@@ -1,0 +1,25 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+{% load static %}
+<title>All Categories</title>
+<div class="m-auto" style="width: 85%;">
+    <p class="font-bold mt-5 mb-3 text-xl">Categories</p>
+    <div class="mb-7">
+        <div class="grid lg:grid-cols-2 grid-cols-gap-6 " style="grid-column-gap: 40px;">
+            {% for c in category %}
+            <a href="/categories/{{c.category_name}}">
+                <div class="bac flex mb-8" style="background-image: url('{{c.imageURL}}');" >
+                    <div></div>
+                    <div>
+                        <div class="flex mb-5 items-center">
+                            <p class="category bg-purple-500 py-1 px-2 rounded-sm text-white">{{c.category_name}}</p>
+                            <p class="ml-6 text-white">{{c.date}}</p>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

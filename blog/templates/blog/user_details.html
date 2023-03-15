@@ -1,0 +1,36 @@
+{% extends 'blog/adminbase.html' %}
+{% block content %}
+<div class="main-content">
+	<div class="info-image">
+		<img src="{{user.userprofile.imageURL}}">
+	</div>
+	<div id="user-info">
+		<div>
+			<p class="title">Username</p>
+			<p>{{user.username}}</p>
+		</div>
+		<div>
+			<p class="title">First name</p>
+			<p>{{user.first_name}}</p>
+		</div>
+		<div>
+			<p class="title">Last name</p>
+			<p>{{user.last_name}}</p>
+		</div>
+		<div>
+			<p class="title">Email</p>
+			<p>{{user.email}}</p>
+		</div>
+		<div>
+			<p class="title">Gender</p>
+			<p>{{user.userprofile.gender}}</p>
+		</div>
+		<div>
+			<p class="title">About You</p>
+			<p>{{user.userprofile.about_you}}</p>
+		</div>
+			
+		
+	</div>
+</div>
+{% endblock %}

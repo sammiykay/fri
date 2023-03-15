@@ -1,0 +1,175 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<script type="text/javascript" src="{% static 'js/jquery.js' %}"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Signup</title>
+	<style type="text/css">
+		* {
+			font-family: sans-serif;
+		}
+		body {
+			background-color: #ccc;
+			height: 100vh;
+			background-repeat: no-repeat;
+			background-position: center;
+			background-size: cover;
+			justify-content: center;
+		}
+		.login-box {
+			width: 350px;
+			border: 1px solid white;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			padding: 5px 10px;
+			background-color: white;
+			transform: translate(-50%, -50%);
+		}
+		.box{
+			width: 290px;
+			margin: auto;
+		}
+		.login-box h2{
+			text-align: center;
+			font-size: 29px;
+		}
+		.login-signup {
+			display: flex;
+			border: 1px solid black;
+			justify-content: space-around; 
+			font-size: 17px;
+			border-radius: 3px;
+		}
+		.login-signup a{
+			padding: 9px 6px;
+			width: 50%;
+			display: block;
+			text-decoration: none;
+			text-align: center;
+			color: black;
+			transition: .5s;
+
+		}
+		.login-signup .login{
+			background-color: rgba(0,0,0,0.60);
+			border-right: 1px solid black;
+			color: white;
+		}
+		input[type='text'], input[type='password'], input[type='email'] {
+			padding: 12px 17px;
+			width: 254px;
+			outline: none;
+			border: 1px solid black;
+			border-radius: 3px;
+		}
+		.login-box a {
+			text-decoration: none;
+			font-size: 15px;
+		}
+		button {
+			width: 290px;
+			background-color: rgba(0,0,0,0.60);
+			padding: 11px;
+			color: white;
+			border: none;
+			transition: .3s;
+			border-radius: 3px;
+		}
+		button:hover {
+			background-color: rgba(0,0,0,0.50);
+			transition: .3s;
+		}
+		.label p {
+			border: 1px solid #BA2121;
+			padding: 4px 9px;
+			border-radius: 3px;
+			font-size: 18px;
+			color: #BA2121;
+			text-align: center;
+			margin-top: 12px;
+			margin-bottom: 8px;
+			width: 270px;
+		}
+		.red {
+			color: red;
+		}
+		#none, #view {
+			font-size: 13px;
+			color: red;
+		}
+
+	</style>
+</head>
+<body>
+	<div class="main">
+		<div class="login-box">
+			<div class="box">
+				<h2>Signup Form</h2>
+				<div class="login-signup">
+					<a href="{% url 'login' %}">Login</a>
+					<a href="#" class="login">Sign Up</a>
+				</div>
+				<form method="POST" id="form">
+					{% csrf_token %}
+					<div class="label">
+						{% if messages %}
+						{% for msg in messages %}
+						<p>{{msg}}</p>
+						{% endfor %}
+						{% endif %}
+					</div>	
+					<p><input type="text" name="username" autofocus placeholder="Username" required></p>
+					<p><input type="email" name="email" placeholder="E-mail Address"required></p>
+					<span id="view" style="display: none;">Password must be atleast 8 characters</span>
+					<span id="none" style="display: none;">Password does not match</span>
+					<p><input type="password" name="password1" onkeyup="on()" id="id_password1" required placeholder="Password"></p>
+					<p><input type="password" name="password2" onkeyup="on()" id="id_password2" required placeholder="Confirm Password"></p>
+					<div>
+						<input type="checkbox" name="checkbox" id="id_checkbox" required>
+						<span> I agree to accept to the terms and condition of kaysammie blog post</span>
+					</div>
+					<p><button type="submit" id="btn" name="">Signup</button></p>
+					
+				</form>
+			</div>
+		</div>
+	</div>	
+	<script type="text/javascript">
+		function on(){
+		let p1 = $('#id_password1').val();
+		let p2 = $('#id_password2').val();
+		if (p1 === p2) {
+			$('#id_password1').css("border", "1px solid green");
+			$('#id_password2').css('border', '1px solid green');
+			$('#btn').css('opacity', '1');
+			$('#btn').removeAttr('disabled');
+			$('#none').css('display', 'none');
+			$('#view').css('display', 'none');
+		}
+		else {
+			$('#id_password1').css('border', '1px solid red');
+			$('#id_password2').css('border', '1px solid red');
+			$('#btn').attr('disabled', 'disabled');
+			$('#btn').css('opacity', '0.5');
+			$('#none').css('display', 'block')
+		}
+
+		if (p1.length < 8) {
+			$('#view').css('display', 'block');
+			$('#btn').attr('disabled', 'disabled');
+
+		}
+		else {
+			$('#view').css('display', 'none');
+			$('#btn').removeAttr('disabled');
+
+		}
+	}
+
+	</script>
+</body>
+</html>
+							

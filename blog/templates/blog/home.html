@@ -1,0 +1,89 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+{% block content %}
+<title>Bloggar | Home</title>
+<div class="m-auto" style="width: 95%;">
+
+<div class="my-10">
+	<div>
+		<div class="mb-7">
+			<div class="grid lg:grid-cols-2 grid-cols-gap-6 " style="grid-column-gap: 40px;">
+				{% for p in post2|slice:"2" %}
+				<a href="/post/{{p.slug}}" class="hover:text-gray-400 transition"><div class="bac flex mb-8" style="background-image: url('{{p.imageURL}}');" >
+					<div></div>
+					<div>
+						<div class="flex mb-5 items-center">
+							<p class="category bg-purple-500 py-1 px-2 rounded-sm text-white">{{p.category.category_name}}</p>
+							<p class="ml-6 text-white">{{p.date}}</p>
+						</div>
+						<p class="text-white text-xl font-bold">{{p.title}}</p>
+					</div>
+				</div></a>
+				{% endfor %}
+			</div>
+		</div>
+		<div>
+			<div class="mt-4">
+				<p class="font-bold text-xl">Recent Post</p>
+				<div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3" style="grid-column-gap: 30px;">
+					{% for p in post1|slice:"6" %}
+					<div class="main">
+						<a href="/post/{{p.slug}}" class="hover:text-gray-400 transition"><img src="{{p.imageURL}}" style="width: 100%; style="width: 100%;;" alt=""></a>
+						<div class="flex items-center mt-3 mb-2">
+							<p class="category text-white font-bold rounded-sm bg-yellow-500 py-1 px-2 rounded-sm text-sm"><a href="/categories/{{p.category.category_name}}">{{p.category}}</a></p>
+							<a href="/post/{{p.slug}}" class="hover:text-gray-400 transition"><p class="ml-6 text-sm">{{p.date}}</p></a>
+						</div>
+						<a href="/post/{{p.slug}}" class="hover:text-gray-400 transition"><p class="text-lg" style="font-weight: 500;">{{p.title}}</p></a>
+					</div>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="mostread">
+</div>
+<div>
+	<p class="mt-10 font-bold text-2xl">Most Read</p>
+	<div>
+		<div class="lg:grid" style="grid-template-columns: 70% 30%; grid-column-gap: 20px;">
+			<div class="m">
+				{% for p in post3|slice:"4" %}
+				<div class="mt-7">
+					<div class="md:grid" style="grid-template-columns: 30% 70%;">
+						<a href="/post/{{p.slug}}" class="hover:text-gray-400 transition"><img class="mb-5" src="{{p.imageURL}}"  alt=""></a>
+						<div class="mt-10">
+							<div class="flex items-center md:ml-7">
+								<a href="/post/{{p.category.category_name}}"><p class="category text-white font-bold rounded-sm bg-yellow-500 py-1 px-2 rounded-sm text-sm">{{p.category.category_name}}</p></a>
+								<p class="ml-6 text-sm">{{p.date}}</p>
+							</div>
+							<a href="/post/{{p.slug}}" class="hover:text-gray-400 transition"><p class="md:ml-7 md:mt-2 my-3 font-bold">{{p.title}}</p></a>
+						</div>
+					</div>
+				</div>
+				{% endfor %}
+				<div class="text-center">
+					<a href="/post"><button class="py-2 px-5 bg-gray-800 text-white my-10 rounded-sm text-sm">View All Post</button></a>
+				</div>
+			</div>
+			<div class="s">
+				<div>
+					<div class="categories">
+						<p class="font-bold text-3xl mt-5 mb-10">Categories</p>
+						{% for c in catego|slice:"4" %}
+						<div class="flex mt-4 justify-between items-center borderb-gray-700" style="">
+							<a class="hover:text-gray-500 transition" href="/categories/{{c.category_name}}"><p class="" style="font-weight: 500;">{{c.category_name}}</p></a>
+							<a href="/categories/{{c.category_name}}"><p class="bg-purple-500 py-1 px-2 text-white font-bold rounded-sm">{{c.posts_count}}</p></a>
+						</div>
+						{% endfor %}  
+						<div class="text-center">
+							<a href="/categories"><button class="py-2 px-5 bg-gray-800 text-white my-10 rounded-sm text-sm">View All Categories</button></a>
+						</div>                             
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+{% endblock %}

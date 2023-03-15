@@ -1,0 +1,28 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+{% load static %}
+    <div class="m-auto" style="width: 95%;">
+	<div class="flex">
+		<p class="text-xl my-6">Post | {{category.category_name}} ({{post_length}})</p>
+	</div>
+		{% if post_length == 0 %}
+				<p>There are no Post in this category</p>
+				{% else %}
+				<div class="grid md:grid-cols-2 lg:grid-cols-3" style="grid-column-gap: 30px;;">
+					{% for p in post %}
+					<a href="/post/{{p.slug}}">
+						<div class="mb-6">
+							<img src="{{p.imageURL}}" style="width: 100%; style="width: 100%;;" alt="">
+							<div class="flex items-center mt-3 mb-2">
+								<p class="category text-white font-bold rounded-sm bg-yellow-500 py-1 px-2 rounded-sm text-sm">{{p.category.category_name}}</p>
+								<p class="ml-6 text-sm text-gray-400">{{p.date}}</p>
+							</div>
+							<p class="text-lg" style="font-weight: 500;">{{p.title}}</p>
+						</div>
+					</a>
+					{% endfor %}
+				</div>
+				{% endif %}
+	</div>
+</div>
+{% endblock %}

@@ -1,0 +1,221 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+{% block content %}
+<html>
+<head>
+	<script src="{% static 'js/jquery.js' %}"></script>
+	<title>Create post</title>
+	<style type="text/css">
+		* {
+			padding: 0px;
+			margin: 0px;
+			font-family: sans-serif;
+		}
+		#profile {
+			width: 700px;
+			background-color: rgba(0,0,0,0.05);
+			margin: 30px auto;
+		}
+		.form{
+			padding: 20px;
+		}
+		.form p {
+			font-size: 18px;
+			margin: 10px 0px;
+		}
+		
+		.cke_1 {
+			width: 655px!important;
+		}
+		input[type='text'],input[type='file'] {
+			padding: 10px 10px;
+			width: 640px;
+			border: 1px solid #ccc;
+			background-color: white;
+		}
+		label {
+			font-size: 15px;
+			
+		}
+		select {
+			padding: 10px 10px;
+			width: 660px;
+			border: 1px solid #ccc;
+			background-color: white;
+
+		}
+		textarea {
+			padding: 10px;
+			width: 440px;
+			border: 1px solid #ccc;
+			min-width: 440px;
+			max-width: 440px;
+			max-height: 190px;
+			min-height: 130px;
+		}
+		button {
+			padding: 6px 28px;
+			margin-top: 10px;
+		}
+		@media only screen and (max-width: 710px) {
+			#profile {
+				width :500px
+			}
+			.cke_1 {
+				width: 460px!important;
+			}
+			input[type='text'],input[type='file'] {
+				width: 440px;
+				}
+			select {
+				width: 460px;
+			}
+			
+		}
+		@media only screen and (max-width: 510px) {
+			#profile {
+				width :350px;
+			}
+			.cke_1 {
+				width: 310px!important;
+			}
+			input[type='text'],input[type='file'] {
+				width: 290px;
+				}
+			select {
+				width: 310px;
+			}
+			
+		}
+		@media only screen and (max-width: 320px) {
+			#profile {
+				width :300px;
+			}
+			.cke_1 {
+				width: 260px!important;
+			}
+			input[type='text'],input[type='file'] {
+				width: 240px;
+				}
+			select {
+				width: 260px;
+			}
+			
+		}
+
+	</style>
+</head>
+<body>
+	<div id="profile">
+		<form method="POST" id="form" enctype="multipart/form-data">
+			<div class="form">
+				{% csrf_token %}
+				<!-- <p>Category:</p> -->
+					<!-- <select name="category">
+						<option>Fashion</option>
+						<option>Science</option>
+						<option>Technology</option>
+						<option>Hacking</option>
+						<option>Christain</option>
+						<option>Talents</option>
+						<option>News</option>
+					</select>
+				
+				<p>Title:</p>
+					<input type="text" name="title" required id="id_title">
+				<p>Image: </p> 
+					<input type="file" name="image" accept="image/*" required id="id_image">
+				<p>Text: </p>
+					<textarea name="text" required id="id_text"></textarea><br> -->
+					{{u_form.media}}
+					{{u_form.as_p}}
+				<button type="submit">Post</button>
+			</div> 	
+		</form>
+	</div>
+</body>
+<script type="text/javascript">
+// alert('Note Pic most be Atleat 1200 by 800px')
+	// document.getElementById('#form').addEventListener('change', save_data())
+
+	// 	function save_data(){
+	// 			var name =  $('#id_name').val();
+	// 			var email = $('#id_email').val();
+	// 			var username = $('#id_username').val();
+	// 			var first_name = $('#id_first_name').val();
+	// 			var last_name = $('#id_last_name').val();
+	// 			var image = $('#id_image').val();
+	// 			var gender = $('#id_gender').val();
+	// 			var facebook = $('#id_facebook').val();
+	// 			var youtube = $('#id_youtube').val();
+	// 			var twitter = $('#id_twitter').val();
+	// 			var linkedin = $('#id_linkedin').val();
+	// 			var token = 'PYVclutiGxkntb9ms51UJ3UWNfFiyfKuPSzQPn5fBTuRb1On2jZQn1H0SYpIbWG3';
+	// 	}
+		
+	// 	$.ajax({
+	// 		type: 'POST',
+	// 		headers: {'X-CSRFToken': token},
+	// 		data: {
+				
+	// 		},
+	// 		success:function(){
+
+	// // 		}
+	// function Submitdata(){
+	// 	var file_data = $('#id_image').prop('files')[0]
+	// 	var csrfmiddlewaretoken = $('input[name=csrfmiddlewaretoken]').val()
+	// 	var form_data = new FormData();
+		
+	// 	form_data.append('file', file_data);
+	// 	form_data.append('csrfmiddlewaretoken', csrfmiddlewaretoken);
+		
+	// 	$.ajax({
+	// 		type: 'POST',
+	// 		url: '/userprofile/',
+	// 		dataType: 'script',
+	// 		cache: false,
+	// 		contentType: false,
+	// 		processData: false,
+	// 		data: form_data,
+	// 		success: function(){
+
+	// 		}
+
+	// 	});
+	
+	// }
+	// $(document).on('submit', '#form', function(e){
+	// 	e.preventDefault();
+		
+	// 	$.ajax({
+	// 		type: 'POST',
+	// 		url: '/userprofile/',
+	// 		data: {
+	// 			name: $('#id_name').val(),
+	// 			email: $('#id_email').val(),
+	// 			username: $('#id_username').val(),
+	// 			first_name: $('#id_first_name').val(),
+	// 			last_name: $('#id_last_name').val(),
+	// 			gender: $('#id_gender').val(),
+	// 			facebook: $('#id_facebook').val(),
+	// 			youtube: $('#id_youtube').val(),
+	// 			twitter: $('#id_twitter').val(),
+	// 			linkedin: $('#id_linkedin').val(),
+	// 			csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+	// 		},
+	// 		success:function(){
+	// 			alert('Update Successfully')
+				
+
+	// 			}
+
+	// 	});
+	// })
+	$('.django-ckeditor-widget').attr('required', 'required')
+</script>
+</html>
+{% endblock %}
+
+</body>
+</html>

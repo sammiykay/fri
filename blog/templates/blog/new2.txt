@@ -1,0 +1,256 @@
+{% extends 'blog/dashboard.html' %}
+{% block content %}
+{% load static %}
+<html>
+<head>
+	<title>{{user.username}} Update Profile</title>
+	<script type="text/javascript" src="{% static 'js/jquery.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/filepond.js' %}"></script>
+	<style type="text/css">
+	
+		#profile {
+			width: 100%;
+			margin: 20px auto;
+			display: flex;
+			justify-content: space-around;
+		}
+		#profile .main-profile {
+			width:300px;
+			margin-top: 30px;
+		}
+		#profile .img {
+			margin-bottom: 20px; 
+		}
+		#profile .img img {
+			width: 100%;
+			height: 350px;
+		}
+		#profile .main-profile strong {
+			font-size: 20px;
+		}
+		#profile .main-profile p{
+			font-size: 15px;
+			line-height: 1.3rem;
+		}
+		#profile .social-media ul{
+	    	width: 100%;
+	    	display: flex;
+	    	margin-top: 20px;
+	    	justify-content: space-around;
+	    }
+	    #profile .social-media ul li{
+	    	list-style: none;
+	    }
+		.form {
+			width: 520px;
+			border-radius: 8px 8px 8px 8px;
+			padding: 20px;
+			background-color: rgba(0,0,0,0.05);
+		}
+		#profile h2 {
+			background-color: rgba(0,0,0,0.4);
+			border-radius: 8px 8px 0px 0px;
+			padding: 10px;
+			text-align: center;
+			width: 672px;
+				
+		}
+		#name {
+			display: inline-grid;
+			grid-template-columns: 1fr 1fr;
+			grid-gap: 30px;
+
+		}
+
+		#id_username,#id_first_name, #id_last_name, #id_email, #id_facebook, #id_twitter, #id_linkedin, #id_website_link {
+			width: 235px;
+			border: 1px solid #ccc;
+			border-radius: 2px;
+			padding: 8px 5px;
+			margin-top: 4px;
+			background-color: white;
+		}
+		select {
+			width: 245px;
+			border: 1px solid #ccc;
+			border-radius: 2px;
+			padding: 0px 5px;
+		}
+		button {
+			width: 100px;
+			padding: 8px 13px;
+		}
+		.gride {
+			display: inline-grid;
+			}
+		#name a {
+			display: none;
+		}
+		.griding {
+			display: grid;
+			grid-template-columns: 100%;
+			margin-top: 10px;
+		}
+		.griding textarea {
+			width: 100%;
+			min-width: 100%;
+			max-width: 100%;
+			min-height: 70px;
+			max-height: 70px;
+			margin-top: 5px;
+			border: 1px solid #ccc;
+			border-radius: 3px;
+			padding: 10px;
+		}
+		#id_image {
+			height: 75px;
+			overflow-y: hidden;
+			border: 1px solid #ccc;
+			border-radius: 9px;
+			margin-top:8px;;
+		}
+		label.img {
+			padding-top: 7px;;
+		}
+		button {
+			width: 100px;
+			margin-top: 10px;
+		}
+		.red {
+			color: red;
+			margin-bottom: 6px;
+		}
+		@media only screen and (max-width: 600px) {
+			.form {
+				width: 300px;
+			}
+			#name {
+				display: block;
+			}
+			.gride {
+				display: block;
+				margin: 20px 0px;
+			}
+			#id_gender {
+				padding: 8px 5px;
+				width: 300px; 
+			}
+			#id_username,#id_first_name, #id_last_name, #id_email, #id_facebook, #id_twitter, #id_linkedin, #id_website_link {
+				width: 300px;
+			}
+		}
+	</style>
+</head>
+<body>
+	<div class="main-content">
+	<form method="POST" enctype="multipart/form-data">
+	<div id="profile">
+			<div class="form">
+				{% csrf_token %}
+				{% if messages %}
+				{% for m in messages %}
+				<p class="red">{{m}}</p>
+				{% endfor %}
+				{% endif %}
+				{% if msz %}
+				<p>{{msz}}</p>
+				{% endif %}
+				<div id='name'>
+					<div class="gride">
+						{{u_form.username.label}}:<br>
+						{{u_form.username}}
+					</div>
+					<div class="gride"> 
+						{{u_form.first_name.label}}:<br>
+						{{u_form.first_name}}			
+					</div>	
+					<div class="gride">
+						{{u_form.last_name.label}}:<br>
+						{{u_form.last_name}}
+					</div>
+					<div class="gride">
+						{{u_form.email.label}}:<br>
+						{{u_form.email}}
+					</div>
+					<div class="gride">
+						{{p_form.gender.label}}:<br>
+						{{p_form.gender}}
+					</div>
+					<div class="gride">				
+						{{p_form.website_link.label}}:<br>
+						{{p_form.website_link}}
+					</div>
+					<div class="gride">				
+						{{p_form.facebook.label}}:<br>
+						{{p_form.facebook}}
+					</div>
+					<div class="gride">	
+						{{p_form.twitter.label}}:<br>
+						{{p_form.twitter}}
+					</div>
+					<div class="gride">	
+						{{p_form.linkedin.label}}:<br>
+						{{p_form.linkedin}}
+					</div>
+				</div><br>
+					<label class="img">Image:</label><br>
+						<input type="file" name="image" accept="image/*" id="id_image">
+					<div class="griding">
+						{{p_form.about_you.label}}:<br>
+						{{p_form.about_you}}
+					</div>
+				<button id="btn">Update</button>
+			</form>
+		</div> 
+	</div>
+</div>
+</div>
+<script>
+	// document.addEventListener('DOMContentLoaded', function(){
+	// 	var files = []
+	// 	const inputElement = document.querySelector("input[type='file']")
+	// 	const pond = FilePond.create(inputElement,{
+	// 		onaddfile: (err, fileItem) => {
+	// 			files.push(fileItem.file)
+				
+	// 		},
+	// 		onremoveFile: (err, fileItem) => {
+	// 			const index = files.indeOf(fileItem.file)
+	// 			if (index > -1) {
+	// 				files.splice(index, 1)
+	// 			}
+	// 		}
+	// 	});
+	// 	var formData =  new FormData();
+	// 	$(document).on('click', '#btn', function(e){
+	// 		formData.append('username', $('#id_username').val())
+	// 		formData.append('first_name', $('#id_first_name').val())
+	// 		formData.append('last_name', $('#id_last_name').val())
+	// 		formData.append('email', $('#id_email').val())
+	// 		formData.append('gender', $('#id_gender').val())
+	// 		formData.append('website_link', $('#id_website_link').val())
+	// 		formData.append('facebook', $('#id_facebook').val())
+	// 		formData.append('twitter', $('#id_twitter').val())
+	// 		formData.append('linkedin', $('#id_linkedin').val())
+	// 		formData.append('about_you', $('#id_about_you').val())
+	// 		formData.append('image', files)
+	// 		formData.append('csrfmiddlewaretoken', '{{ csrf_token }}')
+		
+	// 		$.ajax({
+	// 		type: 'POST',
+	// 		url: "{% url 'edit_profile' %}",
+	// 		data: formData,
+	// 		processData: false,
+	// 		contentType: false,
+	// 		enctype: 'multipart/form-data',
+	// 		success: function(){
+	// 			alert('Profile updated Successfully')
+
+	// 		},
+	// 	})
+	// 	});
+		
+	// })
+	
+</script>
+{% endblock %}

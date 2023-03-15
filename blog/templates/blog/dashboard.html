@@ -1,0 +1,207 @@
+<html>
+<head>
+	{% load static %}
+	<script src="{% static 'js/jquery.js' %}"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<style type="text/css">
+			*{
+			padding: 0px;
+      margin: 0px;
+      font-size: 14px;;
+      
+			font-family: sans-serif;
+			overflow-x: hidden;
+		}
+		#main {
+			display: grid;
+			grid-template-columns: 20% 80%;
+		}
+		.nav-links {
+			background-color: rgba(0,0,0,0.5);
+			position: absolute;
+			top: 23%;
+			left: -30%; 
+			width: 30%;
+			display: block;
+			transition: .5s;
+		}
+		.sidebar {
+			background-color: rgba(0,0,0,0.5);
+			height: 110vh;
+			color: white;
+		}
+		.sidebar .img {
+			text-align: center;
+			margin-top: 20px;
+		}
+		.sidebar img {
+			border-radius: 40%;
+			width: 60%;
+		}
+		.sidebar ul {
+			margin-top: 0px;
+
+		}
+		.sidebar ul li {
+			list-style: none;
+		}
+		.sidebar ul li a {
+			color: white;
+      display: block;
+      font-size: 14px;;
+			text-decoration: none;
+			padding: 20px 20px 20px 20px;
+		}
+		.sidebar ul li a:hover {
+			background-color: rgba(0,0,0,0.4);
+		}
+		.details {
+			width: 600px;
+			border: 1px solid #ccc;
+			border-radius: 6px;
+			margin: 45px auto;
+		}
+		.burger {
+			float: right;
+			margin-top: 9px;
+			display: none;
+		}
+		.burg1,.burg2,.burg3 {
+			width: 20px;
+			height: 3px;
+			background-color: white;
+			margin-top: 4px;
+			transition: .7s;
+		}
+		.details .head {
+			background-color: rgba(0,0,0,0.1);
+			padding: 15px;
+			text-align: center;
+		}
+		@media only screen and (max-width: 700px) {
+			#main {
+				display: block;
+			}	
+			.sidebar {
+				height: 23vh;
+			}
+			.content {
+				display: flex;
+				justify-content: space-around;
+				align-items: center;
+			}
+			.sidebar .img {
+				margin-top: 20px;
+				text-align: initial;
+			}
+			.content ul {
+				display: none;
+			}
+			.content .img img {
+				width: 20%;
+				padding-left: 0px;
+			}
+			.burger {
+				display: block;
+			}
+			.burg1.burg {
+				transform: rotate(-45deg) translate(-5px, 6px);
+				transition: .7s;
+			}
+			.burg2.burg {
+				opacity: 0;
+				transition: .7s;
+			}
+			.burg3.burg {
+				transform: rotate(45deg) translate(-5px, -6px);
+				transition: .7s;
+			}
+			.nav-links.burg {
+				display: block;
+				left: 10%;
+				transition: .5s;
+			}
+		}
+	</style>
+</head>
+<body>
+	<div id="main">
+		<div class="sidebar">
+			<div class="content">
+				<div class="img">
+					<img src="{{user.userprofile.imageURL}}">
+					<h2 style="margin-top: 10px; ">{{user.username.capitalize}}</h2>
+				</div>
+				<ul>
+					<li><a href="{% url 'userprofile' %}">View Profile</a></li>
+					<li><a href="{% url 'edit_profile' %}">Edit Profile</a></li>
+					<li><a href="{% url 'my-post' %}">My Posts</a></li>
+					<li><a href="{% url 'change_password' %}">Change Password</a></li>
+					<li><a href="{% url 'logout' %}">Logout</a></li>
+					<li><a href="{% url 'home' %}">Go to Home</a></li>
+				</ul>
+				<div class="burger" onclick="tog()">
+					<div class="burg1"></div>
+					<div class="burg2"></div>
+					<div class="burg3"></div>
+				</div>
+			</div>
+			<div class="nav-links">
+				<ul>
+					<li><a href="{% url 'userprofile' %}">View Profile</a></li>
+					<li><a href="{% url 'edit_profile' %}">Edit Profile</a></li>
+					<li><a href="{% url 'my-post' %}">My Posts</a></li>
+					<li><a href="{% url 'change_password' %}">Change Password</a></li>
+					<li><a href="{% url 'logout' %}">Logout</a></li>
+					<li><a href="{% url 'home' %}">Go to Home</a></li>
+				</ul>
+			</div>
+		</div>
+		{% block content %}
+		{% endblock %}
+</div>
+</body>
+<script type="text/javascript">
+		function tog() {
+			var y = document.querySelector('.burg1')
+			var z = document.querySelector('.burg3')
+			var a = document.querySelector('.burg2')
+			var b = document.querySelector('.nav-links')
+			y.classList.toggle('burg')
+			a.classList.toggle('burg')
+			b.classList.toggle('burg')
+			z.classList.toggle('burg')
+		}
+	</script>
+<script>
+
+	// $(document).on('submit', '#form', function(e){
+	// 	e.preventDefault();
+		
+	// 	$.ajax({
+	// 		type: 'POST',
+	// 		url: '/edit-profile/',
+	// 		data: {
+	// 			name: $('#id_name').val(),
+	// 			email: $('#id_email').val(),
+	// 			username: $('#id_username').val(),
+	// 			first_name: $('#id_first_name').val(),
+	// 			last_name: $('#id_last_name').val(),
+	// 			gender: $('#id_gender').val(),
+	// 			facebook: $('#id_facebook').val(),
+	// 			website_link: $('#id_website_link').val(),
+	// 			twitter: $('#id_twitter').val(),
+	// 			linkedin: $('#id_linkedin').val(),
+	// 			csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+	// 		},
+	// 		success:function(){
+	// 			alert('Update Successfully')
+				
+
+	// 			}
+
+	// 	});
+	
+
+</script>
+</html>

@@ -1,0 +1,131 @@
+.main {
+		margin-bottom: 20px;
+		margin-top: 20px;
+	} 
+	
+	#cards {
+		width: 80%;
+		margin: auto;
+	}
+	 .update {
+		display: flex;
+		justify-content: space-between;
+	}
+	.update button{
+		padding: 4px 17px;
+	}
+	.card .category {
+		font-size: 18px;
+		line-height: 1rem;
+		background-color: black;
+		color: white;
+		padding: 8px;
+		width: 160px;
+		border-radius: 5px;
+		margin: auto;
+		text-align: center;
+
+	}
+	.card .title {
+		font-size: 18px;
+		text-align: center;
+		line-height: 1.2rem;
+		font-weight: 700;
+		margin-top: 20px;
+	}
+	.card .date {
+		text-align: center;
+		line-height: 1rem;
+		margin-top: 10px;
+		color: rgba(0,0,0,0.4);
+	}
+	.card div {
+		overflow: hidden;
+		margin-top: 10px;
+	}
+	.card img {
+		width: 100%;
+		margin-top: 10px;
+		transition: .7s;
+		overflow: hidden;
+
+
+	}
+	.card img:hover {
+		transform: scale(1.4);
+		transition: .7s;
+	}
+	.card #text {
+		margin-top: 30px;
+	}
+	.card p {
+		overflow: hidden;
+	}
+	.card p {
+		line-height: 2.0rem;
+		font-size: 17px;
+	}
+	.social-media ul {
+		display: flex;
+		list-style: none;
+	}
+	.social-media ul li {
+		padding: 1rem;
+	}
+	.comment {
+			width: 100%;
+			padding: 10px;;
+		}
+		.info {
+			width: 100%;
+			display: flex;
+			align-items: center;
+			border-bottom: 1px solid #ccc;
+			margin-top: 10px;
+			padding-bottom: 10px;
+		}
+		.user-image img {
+			width: 80px;
+			height: 80px;
+			border-radius: 50%;
+		}
+		.info .user-info {
+			margin-left: 15px;	
+		}
+		.info .user-info .created {
+			margin-top: 2px;
+		}
+		.info .user-info .body {
+			margin-top: 2px;	
+		}
+		p.all-comments {
+			margin-bottom: 20px;
+			font-size: 18px;
+			font-weight: 600;
+		}
+		textarea {
+			width: 95%;
+			max-width: 95%;
+			margin-top: 10px;
+			padding: 10px 10px;
+		}
+		form {
+			margin-top: 10px;
+		}
+		form input {
+			padding: 7px 17px;
+			margin-top: 10px;
+		}
+	@media only screen and (max-width: 1200px) {
+		#cards{
+			width: 85%;
+		}
+
+	}
+	@media only screen and (max-width: 1200px) {
+		#cards {
+			width: 92%;
+		}
+		textarea {
+		}
+	}

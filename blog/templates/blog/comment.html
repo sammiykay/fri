@@ -1,0 +1,23 @@
+<div class="comment">
+    <p class="all-comments">All comments</p>
+    {{comment.count}} Comment{{comment|pluralize}}
+        {% for comments in comment %}
+    <div class="info">
+        <div class="user-image">
+            <img class="img" src="{{comments.userprofile.imageURL}}">
+        </div>
+        <div class="user-info">
+            <strong>{{comments.user.username.capitalize}}</strong></p>
+            <p class="body">{{comments.body.capitalize}}</p>
+            <p class="created">{{comments.created}}</p>
+        </div>
+    </div>
+        <div id="sent"></div>
+    {% endfor %}	
+</div>
+<form method="POST" id="form" class="coment-form" action=".">
+    {% csrf_token %}
+    <p>Comment:</p>
+    <p>{{form.body}}</p>
+    <input type="submit" value="submit" name="">
+</form>

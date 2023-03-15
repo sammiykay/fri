@@ -1,0 +1,155 @@
+.container {
+	width: 95%;
+	margin: auto;
+}
+.profile-settings{
+	margin-top: 10px;
+	display: grid;
+	grid-gap: 30px;
+	grid-template-columns: 35% 65%;
+}
+
+.pic img {
+	width: 100%;
+	
+}
+.info {
+	margin-top: 3px;
+}
+.info .links {
+	margin-top: 10px;
+}
+.info .links ul{
+	border-bottom: 1px solid #ccc;
+	width: 96%;
+	display: flex;
+	list-style: none;
+}
+.info .links li{
+}
+.info .links a{
+	text-decoration: none;
+	color: black;
+	display: block;
+	padding: 0.6rem 0.6rem;
+	transition: .5s;
+}
+.info .links a:hover{
+	color: rgba(0,0,0,0.5);
+	transition: .5s;
+}
+.info .links a.active {
+	border-bottom: 1px solid red;
+}
+.about p {
+	color: black;
+	margin-top: 10px;
+}
+.details {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+}
+.details .head {
+	margin: 10px 0px;
+	font-size: 16px;
+	font-weight: 600;
+}
+
+/*change password*/
+.main-content .content2 {
+		width: 500px;
+		margin: 40px auto;
+		border: 1px solid #ccc;
+		background-color: rgba(0,0,0,0.05);}
+
+		.content2 .head {
+		padding: 13px;
+		border-bottom: 1px solid #ccc;
+	}
+	.head h2 {
+		font-size: 18px;;
+	}
+	.content2 form {
+		padding: 20px;
+	}
+	form p {
+		font-size: 18px;
+		margin: 10px 0px;
+
+	}
+	form input[type='password'] {
+		padding: 10px;
+		width: 435px;
+		outline: none;
+		border: 1px solid #ccc;
+		border-radius: 4px;
+	}
+	form input[type='submit'] {
+		padding: 9px;
+		width: 110px;
+		margin-top: 10px;
+	}
+	.content2 .danger {
+		width: 420px;
+		margin: 10px auto;
+		padding: 10px;
+		color: #BA2121;
+		border-radius: 5px;
+		border: 2px solid #BA2121;
+	}
+	.content2 .success {
+		width: 420px;
+		margin: 10px auto;
+		padding: 10px;
+		color: #66B366;
+		border-radius: 5px;
+		border: 2px solid #66B366;
+	}
+	#none {
+		color: red;
+		font-size: 13px;
+	}
+	#view {
+		color: red;	
+		font-size: 13px;
+	}
+	.red {
+		color: red;
+	}
+	@media only screen and (max-width: 900px) {
+		.profile-settings{
+			display: initial;
+		}
+		.pic{
+			text-align: center;
+		}
+		.pic img {
+			width: 60%;
+			margin: 10px 0px;
+		}
+	}
+	@media only screen and (max-width: 700px) {
+		.main-content .content2 {
+			margin-top: 60px;
+
+		}
+	}
+	@media only screen and (max-width: 550px) {
+		.main-content .content2 {
+			width: 300px;
+			margin-top: 60px;
+		}
+		.content2 .danger {
+			width: 220px;
+		}
+		.content2 .success {
+			width: 220px;
+		}
+		form input[type='password'] {
+			width: 240px;
+		}
+		form input[type='submit'] {
+			width: 70px;
+			padding: 5px;
+		}
+	}
