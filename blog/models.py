@@ -18,13 +18,13 @@ class Video(models.Model):
 		except:
 			url = ''
 		return url
-	
+
 class Category(models.Model):
 	category_name = models.CharField(max_length=93)
 	image = models.ImageField()
 	date  = models.DateTimeField(auto_now_add=True)
 	approve = models.BooleanField(default=False)
-	
+
 	@property
 	def imageURL(self):
 		try:
@@ -42,13 +42,17 @@ class Category(models.Model):
 class Post(models.Model):
 	user = models.ForeignKey(User, on_delete=models.CASCADE)
 	category = models.ForeignKey(Category, on_delete=models.CASCADE)
-	title = models.CharField(max_length=100)
+	title = models.CharField(max_length=10000)
 	date = models.DateTimeField(auto_now_add=True)
 	image = models.ImageField()
 	text = RichTextField()
 	publish = models.BooleanField(default= False)
 	slug = models.SlugField(max_length=2500, null=False, blank=True)
 	likes = models.ManyToManyField(User, related_name='likes', blank=True)
+	view_count = models.IntegerField(default=0)
+
+
+
 	class Meta:
 		db_table = "post"
 
@@ -61,7 +65,7 @@ class Post(models.Model):
 	def imageURL(self):
 		try:
 			url = self.image.url
-		except:	
+		except:
 			url = ''
 		return url
 	def save(self, *args, **kwargs):
@@ -71,6 +75,7 @@ class Post(models.Model):
 			output_size = (1000, 800)
 			img.thumbnail(output_size)
 			img.save(self.image.path)
+
 def slug_generator(sender, instance, *args, **kwargs):
 	if not instance.slug:
 		instance.slug = unique_slug_generator(instance)
@@ -86,13 +91,13 @@ class Like(models.Model):
 	user = models.ForeignKey(User, on_delete=models.CASCADE)
 	post = models.ForeignKey(Post, on_delete=models.CASCADE)
 	value = models.CharField(choices=LIKE_CHOICES, default='Like', max_length=30)
-	
+
 	class Meta:
 		db_table = "like"
-	
+
 	def __str__(self):
 		return self.user.username
-	
+
 class Newsletter(models.Model):
 	email = models.EmailField()
 
