@@ -17,7 +17,7 @@
 			font-size: 20px;
 			margin: 10px 0px;
 		}
-		
+
 		.cke_1 {
 			width: 100%!important;
 			height: 100px!important;
@@ -38,7 +38,7 @@
 		}
 		label {
 			font-size: 15px;
-			
+
 		}
 		select {
 			padding: 5px 5px;
@@ -86,21 +86,34 @@
 				width: 300px;
 			}
 		}
-	
+
 </style>
 <div class="m-auto" style="width: 95%;">
+    <div>
+        {% if messages %}
+        {% for m in messages %}
+                    <p class="text-green my-3">{{m}}</p>
+        {% endfor %}
+        {% endif %}
+
+    </div>
 	<div class="create">
 		<div class="font-bold text-xl">All Post</div>
 		<button class="text-sm " id="myBtn">Create Post</button>
 	</div>
 	<div class="">
 		<div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3" style="grid-column-gap: 30px;">
-			{% for p in paginate|slice:"6" %}
+			{% for p in paginate %}
 			<div class="main">
 				<img src="{{p.imageURL}}" style="width: 100%; style="width: 100%;;" alt="">
 				<div class="flex items-center mt-3 mb-2">
 					<p class="category text-white font-bold rounded-sm bg-yellow-500 py-1 px-2 rounded-sm text-sm"><a href="/categories/{{p.category.category_name}}">{{p.category}}</a></p>
 					<p class="ml-6 text-sm">{{p.date}}</p>
+					<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="ml-2 w-5 h-5">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                    <p class="ml-1 text-sm">{{p.view_count}}</p>
 				</div>
 				<a class="hover:text-gray-500 transition" href="/post/{{p.slug}}"><p class="text-lg" style="font-weight: 500;">{{p.title}}</p></a>
 			</div>
@@ -108,7 +121,7 @@
 		</div>
 	</div>
 </div>
-				
+
 
 
 
@@ -124,7 +137,7 @@
 						{{form.media}}
 						{{form.as_p}}
 					<button class="bg-blue-400">Post</button>
-				</div> 	
+				</div>
 			</form>
 		</div>
 	</div>
@@ -138,7 +151,7 @@ var btn = document.getElementById("myBtn");
 // Get the <span> element that closes the modal
 var span = document.getElementsByClassName("close")[0];
 
-// When the user clicks the button, open the modal 
+// When the user clicks the button, open the modal
 btn.onclick = function() {
   modal.style.display = "block";
 }
@@ -162,7 +175,7 @@ window.onclick = function(event) {
 			url: $(this).attr('action'),
 			data: {
 				'post_id': $('input[name=post_id]').val(),
-				csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val() 
+				csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
 			},
 			dataType: 'json',
 			success:function(response){
@@ -180,13 +193,13 @@ window.onclick = function(event) {
 			console.log(max_length)
 			alert(max_length)
 			if (currentText.length > max_length) {
-				return currentText.substr(0, max_length) + '<strong>...</strong>' 
+				return currentText.substr(0, max_length) + '<strong>...</strong>'
 			}
 			else{
 				return currentText
 
 			}
-	
+
 		})
 		function clicking(){
 			var x = document.querySelector('.forms')
@@ -197,4 +210,3 @@ window.onclick = function(event) {
 	</script>
 	{% include 'blog/pagination.html' with page=paginate %}
 {% endblock %}
-	
