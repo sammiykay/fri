@@ -25,7 +25,7 @@ SECRET_KEY = 'a)#0i*1!^tmd)&euz3^hem^45+od^+c9r^!pi$trq_l++7=1!u'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -135,10 +135,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
-
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static')
-]
+STATIC_ROOT = "/home/bloggar/myblog/static"
+# or, eg,
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
 MEDIA_URL = '/images/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
@@ -146,4 +145,69 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
 LOGIN_REDIRECT_URL = '/'
 
 LOGIN_URL = '/login'
-
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'Full',
+        'height': 400,
+        'width': '100%',
+        'toolbar_Full': [
+            {
+                'name': 'document',
+                'items': ['Source', '-', 'Save', 'NewPage', 'Preview', 'Print', '-', 'Templates']
+            },
+            {
+                'name': 'clipboard',
+                'items': ['Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo']
+            },
+            {
+                'name': 'editing',
+                'items': ['Find', 'Replace', '-', 'SelectAll', '-', 'Scayt']
+            },
+            {
+                'name': 'forms',
+                'items': ['Form', 'Checkbox', 'Radio', 'TextField', 'Textarea', 'Select', 'Button', 'ImageButton',
+                          'HiddenField']
+            },
+            '/',
+            {
+                'name': 'basicstyles',
+                'items': ['Bold', 'Italic', 'Underline', 'Strike', '-', 'RemoveFormat']
+            },
+            {
+                'name': 'paragraph',
+                'items': ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', 'CreateDiv',
+                          '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'BidiLtr', 'BidiRtl']
+            },
+            {
+                'name': 'links',
+                'items': ['Link', 'Unlink', 'Anchor']
+            },
+            {
+                'name': 'insert',
+                'items': ['Image', 'Flash', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak',
+                          'Iframe']
+            },
+            '/',
+            {
+                'name': 'styles',
+                'items': ['Styles', 'Format', 'Font', 'FontSize']
+            },
+            {
+                'name': 'colors',
+                'items': ['TextColor', 'BGColor']
+            },
+            {
+                'name': 'tools',
+                'items': ['Maximize', 'ShowBlocks']
+            },
+            {
+                'name': 'about',
+                'items': ['About']
+            },
+        ],
+        'toolbar_Custom': [],
+        'extraAllowedContent': 'iframe[*]',
+        'extraPlugins': 'iframe',
+        'allowedContent': True,
+    }
+}
