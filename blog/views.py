@@ -25,7 +25,7 @@ from bs4 import BeautifulSoup as bs
 import time
 import requests
 import pandas as pd
-
+import random
 
 now = datetime.now()
 def home(request):
@@ -38,8 +38,8 @@ def home(request):
     else:
         forms = NewsletterForm()
     post1= Post.objects.filter(publish=True).order_by('-date')
-    post2= Post.objects.filter(publish=True).order_by('-image')
-    post3= Post.objects.filter(publish=True).order_by('-title')
+    post2= Post.objects.filter(publish=True).order_by('date')
+    post3= Post.objects.filter(publish=True).order_by('-view_count')
     category = Category.objects.filter(approve=True)
     catego = Category.objects.filter(approve=True).annotate(posts_count = Count('post'))
     if request.method == 'POST':
@@ -51,7 +51,7 @@ def home(request):
             form.save()
             return redirect('/')
     else:
-        form = CategoryForm() 
+        form = CategoryForm()
     context = {'forms': forms,
               'post1':post1,
               'form': form,
@@ -109,7 +109,7 @@ def post(request):
     filtered_post = filters.qs
     paginator = Paginator(filtered_post, 9)
     page = request.GET.get('page')
-    if request.method == 'POST': 
+    if request.method == 'POST':
         form = PostForm(request.POST, request.FILES)
         # category = request.POST['category']
         # title = request.POST['title']
@@ -117,7 +117,8 @@ def post(request):
         # text = request.POST['text']
         # post = Post.objects.create(user=request.user,category=category,title=title,image=image,text=text)
         post = form.save(commit=False)
-        post.user = request.user 
+        post.user = request.user
+        post.publish = True
         post.save()
         messages.success(request, 'Post Created, waiting for approval')
         return redirect('/post')
@@ -131,7 +132,7 @@ def post(request):
         post_list = paginator.page(paginator.num_pages)
     context = {
         'paginate': post_list,
-        'page': page, 
+        'page': page,
         'forms': forms,
         'post':  filtered_post,
         'filter': filters,
@@ -147,6 +148,8 @@ def is_ajax(request):
 def Details(request, slug):
     posts = Post.objects.filter(publish=True).order_by('-id')
     post = get_object_or_404(Post, slug = slug)
+    post.view_count += 1
+    post.save()
     postdetails = PostDetail.objects.filter(post=post)
     filters = DetailsFilter(request.GET, queryset=postdetails)
     postdetails = filters.qs
@@ -160,7 +163,7 @@ def Details(request, slug):
         forms = NewsletterForm()
     comment = Comment.objects.filter(post=post)
     print(time.timezone)
-    
+
     dt = now.strftime('%d/%m/%Y %H:%M:%S')
     print(dt)
     if request.method == "POST":
@@ -184,12 +187,12 @@ def Details(request, slug):
         'posts': posts,
         'post': post,
         'postdetails': postdetails,
-        'comment': comment, 
+        'comment': comment,
         'form': form,
         'forms': forms,
         'filters': filters,
     }
-    
+
     return render(request, 'blog/post_details.html', context)
 
 @login_required
@@ -201,7 +204,7 @@ def userdetails(request, slug):
         'postdetails': postdetails
     }
     return render(request, 'blog/userdetails.html', context)
-    
+
 def register(request):
     if request.user.is_authenticated:
         return redirect('/')
@@ -226,7 +229,7 @@ def register(request):
             elif password1 != password2:
                 messages.error(request, 'Password does not match')
                 return redirect('/register')
-            # elif checkbox 
+            # elif checkbox
             else:
                 user_info = UserInfo.objects.create(username=username, password=password3, agree= True)
                 user = User.objects.create_user(email=email,password=password1, username=username)
@@ -264,14 +267,14 @@ def login_page(request):
         form = LoginForm()
         context['form'] = form
     return render(request,'blog/login.html', context)
-        
+
 def log_out(request):
     logout(request)
     return redirect('/')
 
 @login_required
 def userpost(request):
-    if request.method == 'POST': 
+    if request.method == 'POST':
         category = request.POST['category']
         title = request.POST['title']
         image = request.FILES['image']
@@ -323,9 +326,9 @@ def userprofile(request):
         context['u_form'] = u_form
         p_form = ProfileUpdateForm(instance=request.user.userprofile)
         context['p_form'] = p_form
-    
+
     post = Post.objects.filter(publish= True)
-    
+
     return render(request, 'blog/user.html', {'post': post, 'u_form': u_form, 'p_form': p_form})
 
 @login_required
@@ -349,9 +352,9 @@ def editprofile(request):
         context['u_form'] = u_form
         p_form = ProfileUpdateForm(instance=request.user.userprofile)
         context['p_form'] = p_form
-    
+
     post = Post.objects.filter(publish= True)
-    
+
     return render(request, 'blog/edit-profile.html', context)
 
 
@@ -414,11 +417,11 @@ def mypost_details(request, slug):
     context = {
         'post': post,
         'postdetails': postdetails,
-        'comment': comment, 
+        'comment': comment,
         'form': form,
         'forms': forms,
         'filters': filters,
-        # 'is_liked': is_liked, 
+        # 'is_liked': is_liked,
     }
     return render(request, 'blog/mypost_details.html', context)
 
@@ -466,7 +469,7 @@ def like_post(request):
             like.value == "Unlike"
         else:
             like.value == "Like"
-    
+
     return redirect('/post')
 
 @login_required
@@ -518,7 +521,7 @@ def like_mypost(request):
 @login_required
 def custom_admin(request):
     posts= Post.objects.all()
-    
+
     context ={
         'post': posts,
     }
@@ -611,9 +614,9 @@ def admin_add_post(request):
         form = AdminPostForm()
     context = {
         'form': form
-    }    
+    }
     return render(request,'blog/admin_add_post.html', context)
-    
+
 
 def contact(request):
     context = {}
@@ -637,7 +640,7 @@ def search(request):
 
     context = {
         'post': post,
-        't': f'Search result for {q}' 
+        't': f'Search result for {q}'
     }
     return render(request,'blog/all.html', context)
 
