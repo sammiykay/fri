@@ -1,17 +1,20 @@
 {% load static %}
 <!DOCTYPE html>
 <html>
-<head>
+<head
+<script type='text/javascript' src='//pl18818200.highrevenuegate.com/9e/98/48/9e9848761761608790bb71b4f09a82b4.js'></script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5125865123061493"
+     crossorigin="anonymous"></script>
 	<meta charset="utf-8">
 	<script type="text/javascript" src="{% static 'js/jquery.js' %}"></script>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'css/tailwind.css' %}">
-	
+
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 	<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/duotone.css" integrity="sha384-R3QzTxyukP03CMqKFe0ssp5wUvBPEyy9ZspCB+Y01fEjhMwcXixTyeot+S40+AjZ" crossorigin="anonymous"/>
 	<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/fontawesome.css" integrity="sha384-eHoocPgXsiuZh+Yy6+7DsKAerLXyJmu2Hadh4QYyt+8v86geixVYwFqUvMU8X90l" crossorigin="anonymous"/>
 	<style type="text/css">
-	
+
 	body {
 		overflow-x: hidden;
 	}
@@ -91,10 +94,16 @@
 		padding: 6px 10px;
 		height: 40px;
 	}
+	.search div {
+	    width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      overflow: hidden;
+	}
 	.search img {
-		width: 40px;
-		border-radius: 40%;
-		margin-right: 6px;
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
 	}
 	.search li {
 		list-style: none;
@@ -165,11 +174,11 @@
 			margin-top: 30px;
 			font-size: 20px;
 		}
-	
+
 	@media only screen and (max-width: 920px) {
-		
+
 		.newsletter input[type='submit']{
-			width: 405px;	
+			width: 405px;
 			margin: 10px auto;
 		}
 		.sidebar .newsletter {
@@ -177,7 +186,7 @@
 		}
 
 	}
-	
+
 
 	@media only screen and (max-width: 910px){
 		.nav {
@@ -187,7 +196,7 @@
 		}
 		.footer {
 			grid-template-columns: 1fr 1fr;
-		}	
+		}
 		.logo {
 			margin-bottom: 10px;
 		}
@@ -258,10 +267,10 @@
 				font-size: 18px;
 				line-height: 1.5rem;
 			}
-			
+
 
 		}
-@media only screen and (max-width: 320px) { 
+@media only screen and (max-width: 320px) {
 		.footer .facebook .img{
 
 				grid-template-columns: 1fr 1fr;
@@ -275,12 +284,12 @@
         font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     }
         .bac {
-            height: 350px; 
-            background-repeat: no-repeat; 
-            background-size: cover; 
+            height: 350px;
+            background-repeat: no-repeat;
+            background-size: cover;
             background-position: center;
             width: 100%;
-            flex-direction: column; 
+            flex-direction: column;
             justify-content: space-between;
             padding:25px;
             border-radius: 4px;
@@ -303,7 +312,7 @@
     </style>
 </head>
 <body>
-	
+
 	<body>
 		<div class="head">
 			<div class="nav" id="search">
@@ -325,7 +334,9 @@
 				</div>
 				<div class="search">
 					{% if user.is_authenticated %}
-					<img src="{{user.userprofile.imageURL}}" class="image-profile" onclick="profile()"><p onclick="profile()" class="cursor">{{request.user.username.capitalize}}</p>
+					<div>
+					    <img src="{{user.userprofile.imageURL}}" class="image-profile" onclick="profile()"><p onclick="profile()" class="cursor">
+					</div>
 					<!-- <p>no</p> -->
 					{% else %}
 					<li class="list"><a href="{% url 'register' %}">Register</a></li>
@@ -338,19 +349,19 @@
 			<ul>
 				{% if request.user.is_superuser %}
 				<li><a class="user-profile" href="{% url 'userprofile' %}"><svg xmlns="http://www.w3.org/2000/svg" class="svgg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-				
+
 	  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
 	</svg>Profile</a></li>
 				<li><a href="{% url 'logout' %}"><svg class="svgg" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 	  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
 	</svg>Logout</a></li>
 	<li><a href="{% url 'custom_admin' %}"><svg xmlns="http://www.w3.org/2000/svg" class="svgg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-				
+
 	  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
 	</svg>Custom Admin</a></li>
 	{% else %}
 	<li><a class="user-profile" href="{% url 'userprofile' %}"><svg xmlns="http://www.w3.org/2000/svg" class="svgg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-				
+
 	  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
 	</svg>Profile</a></li>
 				<li><a href="{% url 'logout' %}"><svg class="svgg" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -359,39 +370,40 @@
 	{% endif %}
 			</ul>
 		</div>
-		
+
 	{% block content %}
 	{% endblock %}
+
 			<div id="footer">
 			<div class="footer">
 				<div class="about">
 					<h3>About me</h3>
 					<p>My name is Oke Samson Olayinka. A student of Adekunle Ajasin University Akoko (AAUA). I am a full stack web developer</p>
 				</div>
-	
+
 				<div class="facebook">
 					<h2>Facebook</h2><br>
 					<div class="img">
 						<div>
-							<img class="img" src="{% static './images/bat.jpg' %}">
+							<img class="img" src="{% static './images/car.jpg' %}">
 						</div>
 						<div>
-							<img class="img" src="{% static './images/p1.jpg' %}">
+							<img class="img" src="{% static './images/p1.JPG' %}">
 						</div>
 						<div>
-							<img class="img" src="{% static './images/p4.jpg' %}">
+							<img class="img" src="{% static './images/p4.JPG' %}">
 						</div>
 						<div>
-							<img class="img" src="{% static './images/p6.jpg' %}">
+							<img class="img" src="{% static './images/p6.JPG' %}">
 						</div>
 						<div>
-							<img class="img" src="{% static './images/p5.jpg' %}">
+							<img class="img" src="{% static './images/p5.JPG' %}">
 						</div>
 						<div>
-							<img class="img" src="{% static './images/p3.jpg' %}">
+							<img class="img" src="{% static './images/p3.JPG' %}">
 						</div>
-	
-						
+
+
 					</div>
 				</div>
 				<div class="follow-us">
@@ -399,9 +411,9 @@
 					<p>Lets Be social</p>
 					<div class="mt-3">
 						<a target="_blank" href="https://facebook.com/sammiykay"><i class="fab transition hover:text-blue-600 fa-facebook-f"></i></a>
-						<a target="_blank" href="https://instagram.com/kaysammie1"><i class="fab fa-instagram transition hover:text-red-300 ml-1"></i></a>
-						<a target="_blank" href="https://twitter.com/sammiykay"><i class="fab fa-twitter transition hover:text-blue-400 ml-1"></i></a>
-						<a target="_blank" href="https://youtube.com/sammiykay"><i class="fab fa-youtube ml-1 transition hover:text-red-600"></i></a>
+						<a target="_blank" href="https://instagram.com/"><i class="fab fa-instagram transition hover:text-red-300 ml-3"></i></a>
+						<a target="_blank" href="https://twitter.com/sammiykay"><i class="fab fa-twitter transition hover:text-blue-400 ml-3"></i></a>
+						<a target="_blank" href="https://youtube.com/@sammiykay"><i class="fab fa-youtube ml-1 transition hover:text-red-600"></i></a>
 					</div>
 				</div>
 			</div>
@@ -431,15 +443,15 @@
 				let max_length =  $(this).attr('data-maxlength');
 				console.log(max_length)
 				if (currentText.length > max_length) {
-					return currentText.substr(0, max_length) + '<strong>...</strong>' 
+					return currentText.substr(0, max_length) + '<strong>...</strong>'
 				}
 				else{
 					return currentText
-	
+
 				}
-		
+
 			})
-			
+
 			// var setTheme = localStorage.getItem('theme')
 			// if (setTheme == '{% static "css/light_mode.css" %}') {
 			// 	light_mode()
@@ -455,8 +467,8 @@
 			// 	document.getElementById('stylesheet').href = '{% static "css/dark_mode.css" %}'
 			// 	localStorage.setItem('theme', '{% static "css/dark_mode.css" %}')
 			// }
-	
+
 		</script>
-	
+
 
 	</body>
