@@ -1,9 +1,17 @@
 {% extends 'blog/base.html' %}
 {% load static %}
 {% block content %}
-<title>Bloggar | Home</title>
+<title>Simple Scribe | Home</title>
 <div class="m-auto" style="width: 95%;">
-
+<style>
+    .main img {
+        transition: .9s;
+    }
+    .main img:hover {
+        transition: .9s;
+        transform: scale(1.5);
+    }
+</style>
 <div class="my-10">
 	<div>
 		<div class="mb-7">
@@ -27,11 +35,15 @@
 				<p class="font-bold text-xl">Recent Post</p>
 				<div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3" style="grid-column-gap: 30px;">
 					{% for p in post1|slice:"6" %}
-					<div class="main">
-						<a href="/post/{{p.slug}}" class="hover:text-gray-400 transition"><img src="{{p.imageURL}}" style="width: 100%; style="width: 100%;;" alt=""></a>
-						<div class="flex items-center mt-3 mb-2">
+					<div class="main ">
+						<a href="/post/{{p.slug}}" class="hover:text-gray-400 transition"><div class="overflow-hidden"><img src="{{p.imageURL}}" style="width: 100%; style="width: 100%;" alt=""></a></div>
+						<div class="flex items-center mt-3 mb-2 ">
 							<p class="category text-white font-bold rounded-sm bg-yellow-500 py-1 px-2 rounded-sm text-sm"><a href="/categories/{{p.category.category_name}}">{{p.category}}</a></p>
 							<a href="/post/{{p.slug}}" class="hover:text-gray-400 transition"><p class="ml-6 text-sm">{{p.date}}</p></a>
+						    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="ml-6 w-4 h-4">
+                                  <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
+                                  <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                            </svg><p class="ml-1 text-sm">{{p.view_count}}</p>
 						</div>
 						<a href="/post/{{p.slug}}" class="hover:text-gray-400 transition"><p class="text-lg" style="font-weight: 500;">{{p.title}}</p></a>
 					</div>
@@ -55,8 +67,13 @@
 						<div class="mt-10">
 							<div class="flex items-center md:ml-7">
 								<a href="/post/{{p.category.category_name}}"><p class="category text-white font-bold rounded-sm bg-yellow-500 py-1 px-2 rounded-sm text-sm">{{p.category.category_name}}</p></a>
-								<p class="ml-6 text-sm">{{p.date}}</p>
+								<p class="ml-6 text-sm">{{p.date}} </p>
+								<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="ml-6 w-4 h-4">
+                                  <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
+                                  <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                </svg><p class="ml-1 text-sm">{{p.view_count}}</p>
 							</div>
+
 							<a href="/post/{{p.slug}}" class="hover:text-gray-400 transition"><p class="md:ml-7 md:mt-2 my-3 font-bold">{{p.title}}</p></a>
 						</div>
 					</div>
@@ -75,10 +92,20 @@
 							<a class="hover:text-gray-500 transition" href="/categories/{{c.category_name}}"><p class="" style="font-weight: 500;">{{c.category_name}}</p></a>
 							<a href="/categories/{{c.category_name}}"><p class="bg-purple-500 py-1 px-2 text-white font-bold rounded-sm">{{c.posts_count}}</p></a>
 						</div>
-						{% endfor %}  
+						{% endfor %}
 						<div class="text-center">
 							<a href="/categories"><button class="py-2 px-5 bg-gray-800 text-white my-10 rounded-sm text-sm">View All Categories</button></a>
-						</div>                             
+						</div>
+						<script type="text/javascript">
+                        	atOptions = {
+                        		'key' : '537cf3411242725935d36c4b593f892c',
+                        		'format' : 'iframe',
+                        		'height' : 250,
+                        		'width' : 300,
+                        		'params' : {}
+                        	};
+                        	document.write('<scr' + 'ipt type="text/javascript" src="http' + (location.protocol === 'https:' ? 's' : '') + '://www.profitabledisplaynetwork.com/537cf3411242725935d36c4b593f892c/invoke.js"></scr' + 'ipt>');
+                        </script>
 					</div>
 				</div>
 			</div>
